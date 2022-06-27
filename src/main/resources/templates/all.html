@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ap-Serwis</title>
+    <link href="css/dark-theme2.css" rel="stylesheet">
+    <link href="css/bt/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <script src="js/bt/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<div class="navbar-dewis d-flex justify-content-center">
+    <a href="" th:href="@{/}">Strona główna</a>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Szukaj
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/find}">Zlecenia</a>
+            <a href="" th:href="@{/finduser}">Klienci</a>
+            <a href="" th:href="@{/findcar}">Samochody</a>
+        </div>
+    </div>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Dodaj
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/add}">Dodaj klienta</a>
+            <a href="" th:href="@{/add_car}">Dodaj samochód</a>
+            <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="container">
+    <div class="justify-content-center rounded bg-dewis p-2">
+        <table id="table" class="table">
+            <tr>
+                <th>Imie</th>
+                <th>Kontakt</th>
+                <th>Rejestracja</th>
+                <th>Opis</th>
+                <th>Cena</th>
+                <th>Data</th>
+            </tr>
+
+        </table>
+        <div class="d-flex justify-content-between">
+            <img src="img/arrow.png" style="transform: rotate(180deg);" th:onClick="minusPage()" class="rounded p-2">
+            <span id="pageCounter" style="">0</span>
+            <img src="img/arrow.png" th:onClick="plusPage()" class="rounded p-2">
+        </div>
+    </div>
+</div>
+
+<script>
+var page = 0;
+var pageSize = 15;
+var getPageRow;
+
+var counter = document.getElementById("pageCounter");
+
+
+window.onload = loadWork;
+
+function loadWork() {
+    counter.innerHTML = page;
+
+    $.getJSON('http://localhost:8080/allworks/'+page+'/'+pageSize, function(data){
+        for (var i = 0; i < data.length; i++){
+              var name = data[i].cars.people.name + '<br>' + data[i].cars.people.sureName;
+              var phone = data[i].cars.people.phone;
+              var cars = data[i].cars.plateNumber;
+              var description = data[i].description;
+              var price = data[i].price + "";
+              var date = data[i].date;
+              var row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
+              $("#table").append(row);
+        }
+    });
+}
+
+function plusPage() {
+    getPageRow = document.getElementById("table").rows.length;
+
+    if (getPageRow > pageSize) {
+        $("#table #tr").remove();
+        page = page+1;
+        loadWork();
+    }
+}
+
+function minusPage() {
+    if (page != 0) {
+        $("#table #tr").remove();
+        page = page-1;
+        loadWork();
+    }
+}
+
+</script>
+</body>
+</html>

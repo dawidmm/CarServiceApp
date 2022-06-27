@@ -1,0 +1,186 @@
+html {
+    background-color: #5c5c5c;
+}
+
+img {
+    width: 48px;
+    height: 48px;
+    margin: 5px;
+}
+
+.input-dewis {
+    background-color: #5c5c5c !important;
+    color: #cbcbcb !important;
+}
+
+.dewis-date {
+    background-color: #212529 !important;
+    height: 50%;
+}
+
+th:hover {
+    background-color: #333 !important;
+    color: ;
+    cursor: pointer;
+}
+
+.input-dewis-size {
+    width: 15px;
+    height: 15px;
+}
+
+.input-dewis{
+    color: black;
+    background-color: white;
+}
+
+img:hover {
+    background-color: #5c5c5c;
+}
+
+#pageCounter {
+    font-size: 32px;
+    color: #c5c3c3;
+}
+
+button {
+    color: #d3d3d3 !important;
+}
+
+button:hover {
+    transform: scale(1.01);
+}
+
+select:hover, input:hover {
+    cursor: pointer;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #5c5c5c !important;
+}
+
+.td-breaker {
+    text-align: left !important;
+}
+
+td {
+    color: #cbcbcb;
+    background-color: #333 !important;
+    font-family: 'Roboto';
+    vertical-align: middle;
+}
+
+td:hover {
+    background-color: #5c5c5c !important;
+}
+
+th {
+    color: #c3c3c3;
+    margin: 5px;
+}
+
+tr {
+    text-align: center;
+    background-color: #212529;
+}
+
+table {
+    border-color: #5a5a5a !important;
+}
+
+label {
+    color: #cbcbcb;
+    background-color: #333;
+}
+
+input, textarea, select, .bg-filter-dewis {
+    background-color: #5c5c5c !important;
+    border: 1px solid #2a2a2a !important;
+    color: #cbcbcb !important;
+}
+
+select, input {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+}
+
+::placeholder {
+  color: #959595 !important;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #959595 !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: #959595 !important;
+}
+
+.bg-dewis {
+    background-color: #333;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) !important;
+}
+
+.navbar-dewis {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar-dewis a {
+  float: left;
+  font-size: 16px;
+  color: #cbcbcb;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dropdown-dewis {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown-dewis .dropbtn-dewis {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #cbcbcb;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+.navbar-dewis a:hover, .dropdown-dewis:hover .dropbtn-dewis {
+  background-color: #5c5c5c;
+  color: white;
+}
+
+.dropdown-content-dewis {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content-dewis a {
+  float: none;
+  color: #cbcbcb;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+
+}
+
+.dropdown-dewis:hover .dropdown-content-dewis {
+  display: block;
+}

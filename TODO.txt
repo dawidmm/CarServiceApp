@@ -1,0 +1,1 @@
+POPRAWIC WYSZUKIWANIE PO NAZWIE LUB NUMERZE REJ BO WorkServiceImpl PageImpl zle wyrzuca

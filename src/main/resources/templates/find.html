@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ap-Serwis</title>
+    <link href="css/dark-theme3.css" rel="stylesheet">
+    <link href="css/bt/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <script src="js/bt/bootstrap.bundle.min.js"></script>
+    <script src="js/temp-find3.js"></script>
+    <script src="js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<div class="navbar-dewis d-flex justify-content-center">
+    <a href="" th:href="@{/}">Strona główna</a>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Szukaj
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/find}">Zlecenia</a>
+            <a href="" th:href="@{/finduser}">Klienci</a>
+            <a href="" th:href="@{/findcar}">Samochody</a>
+        </div>
+    </div>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Dodaj
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/add}">Dodaj klienta</a>
+            <a href="" th:href="@{/add_car}">Dodaj samochód</a>
+            <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container d-flex justify-content-center">
+    <button class="btn btn-dark d-flex align-items-center" th:onClick="changeVisible()" type="button">Zwiń
+    </button>
+    <div class="col-md-4 justify-content-center rounded bg-dewis p-3" id="hideId">
+        <form id="form" name="form" class="">
+
+            <!-- name -->
+
+            <div class="form-group container d-flex justify-content-center p-2">
+                <select name="name" id="name" class="rounded">
+                    <option value="">Imie i nazwisko</option>
+                </select>
+            </div>
+
+            <!-- car -->
+
+            <div class="form-group container d-flex justify-content-center p-2">
+                <select name="car" id="car" class="rounded">
+                    <option value="">Wybierz Samochód</option>
+                </select>
+            </div>
+
+            <!-- button -->
+
+            <br>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="container">
+                        <button type="button" th:onclick="search()" name="submit" id="submit"
+                                class="form-control btn btn-success">Szukaj
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="container rounded bg-filter-dewis mt-3 d-flex justify-content-around">
+            <div class="d-flex flex-column">
+                <label for="imie" class="input-dewis">Imie</label>
+                <input type="checkbox" value="test" id="imie" class="mx-auto m-1 input-dewis input-dewis-size" Checked
+                       th:onClick="reworkTable()">
+            </div>
+            <div class="d-flex flex-column">
+                <label for="kontakt" class="input-dewis">Kontakt</label>
+                <input type="checkbox" value="test" id="kontakt" class="mx-auto m-1 input-dewis input-dewis-size"
+                       Checked th:onClick="reworkTable()">
+            </div>
+            <div class="d-flex flex-column">
+                <label for="rejestracja" class="input-dewis">Rejestracja</label>
+                <input type="checkbox" value="test" id="rejestracja" class="mx-auto m-1 input-dewis input-dewis-size"
+                       Checked th:onClick="reworkTable()">
+            </div>
+            <div class="d-flex flex-column">
+                <label for="opis" class="input-dewis">Opis</label>
+                <input type="checkbox" value="test" id="opis" class="mx-auto m-1 input-dewis input-dewis-size" Checked
+                       th:onClick="reworkTable()">
+            </div>
+            <div class="d-flex flex-column">
+                <label for="cena" class="input-dewis">Cena</label>
+                <input type="checkbox" value="test" id="cena" class="mx-auto m-1 input-dewis input-dewis-size" Checked
+                       th:onClick="reworkTable()">
+            </div>
+            <div class="d-flex flex-column">
+                <label for="data" class="input-dewis">Data</label>
+                <input type="checkbox" value="test" id="data" class="mx-auto m-1 input-dewis input-dewis-size" Checked
+                       th:onClick="reworkTable()">
+            </div>
+        </div>
+    </div>
+
+    <div class="dewis-date rounded p-3" id="hideThis">
+            <div class="d-flex flex-column">
+                <div class="form-group container d-flex justify-content-center p-2">
+                    <input type="date" id="startDate" class="rounded" placeholder="Początek">
+                </div>
+                <div class="form-group container d-flex justify-content-center p-2">
+                    <input type="date" id="endDate" class="rounded" placeholder="Koniec">
+                </div>
+            </div>
+    </div>
+</div>
+
+<br>
+<div class="container">
+    <div class="justify-content-center rounded bg-dewis">
+        <table id="table" class="table">
+            <tr>
+                <th id="thImie" class="rounded" th:onClick="oneTh()">Imie</th>
+                <th id="thKontakt" class="rounded" th:onClick="twoTh()">Kontakt</th>
+                <th id="thRejestracja" class="rounded" th:onClick="threeTh()">Rejestracja</th>
+                <th id="thOpis" class="rounded" th:onClick="fourTh()">Opis</th>
+                <th id="thCena" class="rounded" th:onClick="fiveTh()">Cena</th>
+                <th id="thData" class="rounded" th:onClick="sixTh()">Data</th>
+            </tr>
+        </table>
+        <div class="d-flex justify-content-between">
+            <img src="img/arrow.png" style="transform: rotate(180deg);" th:onClick="minusPage()" class="rounded p-2">
+            <span id="pageCounter" style="">0</span>
+            <img src="img/arrow.png" th:onClick="plusPage()" class="rounded p-2">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

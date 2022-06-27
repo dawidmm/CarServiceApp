@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ap-Serwis</title>
+    <link href="css/dark-theme2.css" rel="stylesheet">
+    <link href="css/bt/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <script src="js/bt/bootstrap.bundle.min.js"></script>
+    <script src="js/car.js"></script>
+    <script src="js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<div class="navbar-dewis d-flex justify-content-center">
+    <a href="" th:href="@{/}">Strona główna</a>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Szukaj
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/find}">Zlecenia</a>
+            <a href="" th:href="@{/finduser}">Klienci</a>
+            <a href="" th:href="@{/findcar}">Samochody</a>
+        </div>
+    </div>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Dodaj
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/add}">Dodaj klienta</a>
+            <a href="" th:href="@{/add_car}">Dodaj samochód</a>
+            <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container col-md-4 rounded bg-dewis p-3">
+    <form th:action="@{/add_car}" method="post" id="form" name="form">
+
+        <!-- owner -->
+
+        <div class="form-group d-flex justify-content-center p-2">
+            <select name="owner" id="owner" class="rounded">
+                <option value="">Wybierz Klienta</option>
+            </select>
+        </div>
+
+        <!-- name -->
+
+        <div class="form-group p-2">
+            <label for="plate">Numer rejestracyjny: </label>
+            <input type="text" class="form-control" id="plate" name="plate" placeholder="Wpisz numer rejestracyjny"
+                   autofocus="autofocus" required>
+        </div>
+
+
+        <!-- button -->
+
+        <br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="container">
+<!--                    <input type="submit" name="submit" id="submit"-->
+<!--                           class="form-control btn btn-success" value="Dodaj samochód">-->
+                    <button type="submit" name="submit" id="submit" class="form-control btn btn-success bg-success">
+                        Dodaj samochód
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <br>
+
+    <div th:if="${param.add}" class="p-2">
+        <div class="alert alert-success" role="alert">Dodano prawidłowo!</div>
+    </div>
+</div>
+
+</body>
+</html>
