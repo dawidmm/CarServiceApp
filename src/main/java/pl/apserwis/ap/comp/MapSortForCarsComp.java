@@ -1,4 +1,4 @@
-package pl.apserwis.ap.service;
+package pl.apserwis.ap.comp;
 
 import java.util.Comparator;
 import java.util.Map;

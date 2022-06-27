@@ -2,18 +2,14 @@ package pl.apserwis.ap;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import pl.apserwis.ap.dto.PeopleDto;
-import pl.apserwis.ap.dto.WorkDto;
+import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
 import pl.apserwis.ap.repository.CarsRepository;
 import pl.apserwis.ap.repository.PeopleRepository;
 import pl.apserwis.ap.repository.WorkRepository;
-
-import java.util.Date;
 
 
 @Component

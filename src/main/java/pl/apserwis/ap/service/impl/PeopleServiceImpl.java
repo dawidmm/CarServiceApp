@@ -1,21 +1,23 @@
-package pl.apserwis.ap.service;
+package pl.apserwis.ap.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+import pl.apserwis.ap.comp.MapSortComp;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.repository.CarsRepository;
 import pl.apserwis.ap.repository.PeopleRepository;
 import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.PeopleService;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class PeopleServiceImpl implements PeopleService{
+public class PeopleServiceImpl implements PeopleService {
 
     WorkRepository workRepository;
     PeopleRepository peopleRepository;

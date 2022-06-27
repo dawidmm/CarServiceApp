@@ -1,13 +1,12 @@
-package pl.apserwis.ap.service;
+package pl.apserwis.ap.service.impl;
 
 import lombok.AllArgsConstructor;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.*;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+import pl.apserwis.ap.comp.SortComp;
 import pl.apserwis.ap.entity.Work;
 import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.WorkService;
 
 import java.util.*;
 import java.util.stream.Collectors;

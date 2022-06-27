@@ -1,4 +1,4 @@
-package pl.apserwis.ap.dto;
+package pl.apserwis.ap.entity.dto;
 
 import lombok.AllArgsConstructor;
 import pl.apserwis.ap.entity.Cars;

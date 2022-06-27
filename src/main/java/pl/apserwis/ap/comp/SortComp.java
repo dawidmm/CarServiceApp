@@ -1,4 +1,4 @@
-package pl.apserwis.ap.service;
+package pl.apserwis.ap.comp;
 
 import pl.apserwis.ap.entity.Work;
 

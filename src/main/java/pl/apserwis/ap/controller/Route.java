@@ -1,20 +1,16 @@
 package pl.apserwis.ap.controller;
 
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import pl.apserwis.ap.dto.CarsDto;
-import pl.apserwis.ap.dto.PeopleDto;
-import pl.apserwis.ap.dto.WorkDto;
+import pl.apserwis.ap.entity.dto.CarsDto;
+import pl.apserwis.ap.entity.dto.PeopleDto;
+import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.repository.CarsRepository;
 import pl.apserwis.ap.repository.PeopleRepository;
 import pl.apserwis.ap.repository.WorkRepository;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 @org.springframework.stereotype.Controller
 public class Route {

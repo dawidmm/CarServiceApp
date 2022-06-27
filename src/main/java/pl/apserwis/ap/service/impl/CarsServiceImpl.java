@@ -1,12 +1,14 @@
-package pl.apserwis.ap.service;
+package pl.apserwis.ap.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+import pl.apserwis.ap.comp.MapSortForCarsComp;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.repository.CarsRepository;
 import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.CarsService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
