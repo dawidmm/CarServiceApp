@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="js/bt/bootstrap.bundle.min.js"></script>
-    <script src="js/temp-find4.js"></script>
+    <script src="js/temp-find3.js"></script>
     <script src="js/jquery/jquery.js"></script>
 </head>
 <body>
 
-<div class="navbar-dewis d-flex justify-content-center">
+<div class="navbar-dewis d-flex justify-content-center" id="topMenu">
     <a href="" th:href="@{/}">Strona główna</a>
     <div class="dropdown-dewis">
         <button class="dropbtn-dewis">Szukaj
@@ -50,7 +50,7 @@
 
 <br>
 
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center" id="searchMenu">
     <button class="btn btn-dark d-flex align-items-center" th:onClick="changeVisible()" type="button">Zwiń
     </button>
     <div class="col-md-4 justify-content-center rounded bg-dewis p-3" id="hideId">
@@ -120,8 +120,8 @@
             </div>
         </div>
     </div>
-
-    <div class="dewis-date rounded p-3" id="hideThis">
+    <div>
+        <div class="dewis-date rounded p-3" id="hideThis">
             <div class="d-flex flex-column">
                 <div class="form-group container d-flex justify-content-center p-2">
                     <input type="date" id="startDate" class="rounded" placeholder="Początek">
@@ -130,6 +130,8 @@
                     <input type="date" id="endDate" class="rounded" placeholder="Koniec">
                 </div>
             </div>
+        </div>
+        <button type="button" class="btn btn-danger" style="width:100%" th:onClick="deleteMode()" id="delBtn">Tryb usuwania</button>
     </div>
 </div>
 
@@ -137,7 +139,7 @@
 <div class="container">
     <div class="justify-content-center rounded bg-dewis">
         <table id="table" class="table">
-            <tr>
+            <tr id="topTable">
                 <th id="thImie" class="rounded" th:onClick="oneTh()">Imie</th>
                 <th id="thKontakt" class="rounded" th:onClick="twoTh()">Kontakt</th>
                 <th id="thRejestracja" class="rounded" th:onClick="threeTh()">Rejestracja</th>
@@ -146,7 +148,7 @@
                 <th id="thData" class="rounded" th:onClick="sixTh()">Data</th>
             </tr>
         </table>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" id="botTable">
             <img src="img/arrow.png" style="transform: rotate(180deg);" th:onClick="minusPage()" class="rounded p-2">
             <span id="pageCounter" style="">0</span>
             <img src="img/arrow.png" th:onClick="plusPage()" class="rounded p-2">

@@ -46,6 +46,8 @@ var visablePanel = false;
 var startDate = "";
 var endDate = "";
 
+var deleteBool = false;
+
 
 function clearFindFlag() {
     plateFlag = false;
@@ -386,5 +388,41 @@ function changeVisible() {
 }
 
 function deleteWorkRow(id){
-    alert(id);
+    if(deleteBool)
+        alert(id);
+}
+
+function deleteMode(){
+    if(deleteBool)
+        deleteBool = false;
+    else
+        deleteBool = true;
+    disableAll();
+}
+
+function disableAll() {
+
+if(deleteBool) {
+    $("#topMenu *").prop('disabled',true);
+    $("#searchMenu *").prop('disabled',true);
+    $("#topTable *").prop('disabled',true);
+    $("#botTable *").prop('disabled',true);
+    document.getElementById("delBtn").disabled = false;
+    $('html').css("background-color","#583f3f");
+    $('body').css({'cssText': 'background-color: #583f3f !important'});
+    $("#hideId").hide();
+    $("#hideThis").hide();
+    visablePanel = true;
+} else {
+    $("#topMenu *").prop('disabled',false);
+    $("#searchMenu *").prop('disabled',false);
+    $("#topTable *").prop('disabled',false);
+    $("#botTable *").prop('disabled',false);
+    $('html').css("background-color","#5c5c5c");
+    $('body').css({'cssText': 'background-color: #5c5c5c !important'});
+    $("#hideId").show();
+    $("#hideThis").show();
+    visablePanel = false;
+}
+
 }
