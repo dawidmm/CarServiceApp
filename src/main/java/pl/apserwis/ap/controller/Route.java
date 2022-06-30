@@ -70,6 +70,21 @@ public class Route {
         return "find_car";
     }
 
+    @GetMapping("/remove_people")
+    public String removePeople() {
+        return "remove_people";
+    }
+
+    @GetMapping("/remove_car")
+    public String removeCar() {
+        return "remove_car";
+    }
+
+    @GetMapping("/remove_work")
+    public String removeWork() {
+        return "remove_work";
+    }
+
     // *POST MAPPING*
 
     @PostMapping("/add")

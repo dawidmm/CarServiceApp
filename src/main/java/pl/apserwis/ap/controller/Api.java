@@ -1,8 +1,11 @@
 package pl.apserwis.ap.controller;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
@@ -86,5 +89,67 @@ public class Api {
                                       @RequestParam("edate") String endDate) {
 
         return workService.findAllWorkWithName(id, page, pageSize, sql, startDate, endDate);
+    }
+
+    @GetMapping("/people/car/{id}")
+    public long getPeopleCarCount(@PathVariable("id") Long id) {
+        return carsRepository
+                .findByPeople(peopleRepository
+                        .findById(id)
+                        .get())
+                .size();
+    }
+
+    @GetMapping("/people/work/{id}")
+    public long getPeopleWorkCount(@PathVariable("id") Long id) {
+        return workRepository
+                .findByCars(carsRepository
+                        .findByPeople(peopleRepository
+                                .findById(id)
+                                .get())
+                        .stream()
+                        .findAny()
+                        .get())
+                .size();
+    }
+
+    @GetMapping("/car/work/{id}")
+    public long getCarWorkCount(@PathVariable("id") Long id) {
+        return workRepository.findByCars(carsRepository.findById(id).get()).size();
+    }
+
+    @DeleteMapping("/people/{id}")
+    @Cascade(value = CascadeType.ALL)
+    @Transactional
+    public void deletePeople(@PathVariable("id") Long id) {
+        var people = peopleRepository.findById(id).get();
+        var cars = carsRepository.findByPeople(people);
+
+        for (Cars c : cars) {
+            for (Work w : workRepository.findByCars(c))
+                deleteWork(w.getId());
+            deleteCar(c.getId());
+        }
+        peopleRepository.delete(people);
+    }
+
+    @DeleteMapping("/car/{id}")
+    @Cascade(value = CascadeType.ALL)
+    @Transactional
+    public void deleteCar(@PathVariable("id") Long id) {
+        var car = carsRepository.findById(id);
+        if (car.isPresent()) {
+            for (Work w : workRepository.findByCars(car.get()))
+                deleteWork(w.getId());
+            carsRepository.delete(car.get());
+        }
+    }
+
+    @DeleteMapping("/work/{id}")
+    @Cascade(value = CascadeType.ALL)
+    @Transactional
+    public void deleteWork(@PathVariable("id") Long id) {
+        var work = workRepository.findById(id);
+        work.ifPresent(cars -> workRepository.delete(work.get()));
     }
 }

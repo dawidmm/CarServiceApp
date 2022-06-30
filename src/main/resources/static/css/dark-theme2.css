@@ -1,5 +1,6 @@
 html {
     background-color: #5c5c5c;
+    cursor: pointer;
 }
 
 img {
@@ -66,7 +67,7 @@ body {
 
 td {
     color: #cbcbcb;
-    background-color: #333 !important;
+    background-color: #4a4a4a !important;
     font-family: 'Roboto';
     vertical-align: middle;
 }

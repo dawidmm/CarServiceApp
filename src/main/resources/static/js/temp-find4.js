@@ -99,7 +99,7 @@ $.getJSON('http://localhost:8080/workwithplate/'+page+'/'+pageSize, {id:plateInp
           description = data.content[i].description;
           price = data.content[i].price + "";
           date = data.content[i].date;
-          rowBuilder();
+          rowBuilder(data.content[i].id);
 //          row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
           $("#table").append(row);
           reworkTable();
@@ -124,7 +124,7 @@ $.getJSON('http://localhost:8080/workwithname/'+page+'/'+pageSize, {id:nameInput
           description = data.content[i].description;
           price = data.content[i].price + "";
           date = data.content[i].date;
-          rowBuilder();
+          rowBuilder(data.content[i].id);
 //          row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
           $("#table").append(row);
           reworkTable();
@@ -149,7 +149,7 @@ endDate = document.getElementById('endDate').value;
               description = data.content[i].description;
               price = data.content[i].price + "";
               date = data.content[i].date;
-              rowBuilder();
+              rowBuilder(data.content[i].id);
 //              row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
               $("#table").append(row);
               reworkTable();
@@ -269,8 +269,8 @@ function reworkTable() {
     }
 }
 
-function rowBuilder() {
-    row = "<tr id='tr' class='tr'><td id='oneColumn'>" +
+function rowBuilder(id) {
+    row = "<tr id='tr' class='tr' onClick='deleteWorkRow(" + id + ")'><td id='oneColumn'>" +
     name + "</td><td id='twoColumn'>" +
     phone + "</td><td id='threeColumn'>" +
     cars + "</td><td id='fourColumn' class='td-breaker'>" +
@@ -383,4 +383,8 @@ function changeVisible() {
         $("#hideThis").hide();
         visablePanel = true;
     }
+}
+
+function deleteWorkRow(id){
+    alert(id);
 }

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ap-Serwis</title>
-    <link href="css/dark-theme3.css" rel="stylesheet">
+    <link href="css/dark-theme2.css" rel="stylesheet">
     <link href="css/bt/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="js/bt/bootstrap.bundle.min.js"></script>
-    <script src="js/temp-find3.js"></script>
+    <script src="js/temp-find4.js"></script>
     <script src="js/jquery/jquery.js"></script>
 </head>
 <body>
@@ -34,6 +34,16 @@
             <a href="" th:href="@{/add}">Dodaj klienta</a>
             <a href="" th:href="@{/add_car}">Dodaj samochód</a>
             <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+        </div>
+    </div>
+    <div class="dropdown-dewis">
+        <button class="dropbtn-dewis">Usuń
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-dewis">
+            <a href="" th:href="@{/remove_people}">Usuń klienta</a>
+            <a href="" th:href="@{/remove_car}">Usuń samochód</a>
+            <a href="" th:href="@{/remove_work}">Usuń zlecenie</a>
         </div>
     </div>
 </div>
