@@ -4,21 +4,19 @@ import lombok.AllArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
-import pl.apserwis.ap.repository.CarsRepository;
-import pl.apserwis.ap.repository.PeopleRepository;
-import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.repository.CarsRepository;
+import pl.apserwis.ap.service.repository.PeopleRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 import pl.apserwis.ap.service.CarsService;
 import pl.apserwis.ap.service.PeopleService;
 import pl.apserwis.ap.service.WorkService;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -102,15 +100,19 @@ public class Api {
 
     @GetMapping("/people/work/{id}")
     public long getPeopleWorkCount(@PathVariable("id") Long id) {
-        return workRepository
-                .findByCars(carsRepository
-                        .findByPeople(peopleRepository
-                                .findById(id)
-                                .get())
-                        .stream()
-                        .findAny()
-                        .get())
-                .size();
+        try {
+            return workRepository
+                    .findByCars(carsRepository
+                            .findByPeople(peopleRepository
+                                    .findById(id)
+                                    .get())
+                            .stream()
+                            .findAny()
+                            .get())
+                    .size();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @GetMapping("/car/work/{id}")

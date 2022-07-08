@@ -36,16 +36,6 @@
             <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
         </div>
     </div>
-    <div class="dropdown-dewis">
-        <button class="dropbtn-dewis">Usuń
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content-dewis">
-            <a href="" th:href="@{/remove_people}">Usuń klienta</a>
-            <a href="" th:href="@{/remove_car}">Usuń samochód</a>
-            <a href="" th:href="@{/remove_work}">Usuń zlecenie</a>
-        </div>
-    </div>
 </div>
 
 <br>
@@ -59,17 +49,19 @@
             <!-- name -->
 
             <div class="form-group container d-flex justify-content-center p-2">
-                <select name="name" id="name" class="rounded">
-                    <option value="">Imie i nazwisko</option>
-                </select>
+                <input list="name" placeholder="Wybierz klienta" id="name2"/>
+                <datalist id="name" class="rounded">
+                    <option data-id="0"></option>
+                </datalist>
             </div>
 
             <!-- car -->
 
             <div class="form-group container d-flex justify-content-center p-2">
-                <select name="car" id="car" class="rounded">
-                    <option value="">Wybierz Samochód</option>
-                </select>
+                <input list="car" placeholder="Wybierz Samochód" id="car2"/>
+                <datalist id="car" class="rounded">
+                    <option data-id="0"></option>
+                </datalist>
             </div>
 
             <!-- button -->
@@ -131,7 +123,9 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-danger" style="width:100%" th:onClick="deleteMode()" id="delBtn">Tryb usuwania</button>
+        <button type="button" class="btn btn-danger" style="width:100%" th:onClick="deleteMode()" id="delBtn">Tryb
+            usuwania
+        </button>
     </div>
 </div>
 

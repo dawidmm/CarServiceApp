@@ -5,7 +5,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import pl.apserwis.ap.comp.SortComp;
 import pl.apserwis.ap.entity.Work;
-import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 import pl.apserwis.ap.service.WorkService;
 
 import java.util.*;
@@ -45,7 +45,7 @@ public class WorkServiceImpl implements WorkService {
         List<Work> list = workRepository.findAll();
         List<Work> filteredList;
         if (startDate.isEmpty() && endDate.isEmpty()) {
-            filteredList = list.stream().filter(c -> Objects.equals(c.getCars().getId(), id)).sorted(new SortComp(sql)).collect(Collectors.toList());
+            filteredList = list.stream().filter(c -> Objects.equals(c.getCars().getPeople().getId(), id)).sorted(new SortComp(sql)).collect(Collectors.toList());
         } else {
             filteredList = getSortedWork(list, startDate, endDate).stream()
                     .filter(c -> Objects.equals(c.getCars().getPeople().getId(), id))

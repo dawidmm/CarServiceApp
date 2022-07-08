@@ -5,12 +5,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.apserwis.ap.entity.dto.CarsDto;
 import pl.apserwis.ap.entity.dto.PeopleDto;
 import pl.apserwis.ap.entity.dto.WorkDto;
-import pl.apserwis.ap.repository.CarsRepository;
-import pl.apserwis.ap.repository.PeopleRepository;
-import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.repository.CarsRepository;
+import pl.apserwis.ap.service.repository.PeopleRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 public class Route {
@@ -89,13 +90,23 @@ public class Route {
 
     @PostMapping("/add")
     public String addPeople(String name, String surname, String phone) {
-        peopleRepository.save(new PeopleDto(name, surname, phone).getPeople());
+        long count = peopleRepository.findAll().stream().filter(e -> e.getName().equals(name) && e.getSureName().equals(surname)).count();
+
+        if (count == 0)
+            peopleRepository.save(new PeopleDto(name, surname, phone).getPeople());
+        else
+            return "redirect:/error";
         return "redirect:/add?add";
     }
 
     @PostMapping("/add_car")
     public String addCar(Long owner, String plate) {
-        carsRepository.save(new CarsDto(owner, plate.toUpperCase()).getCars());
+        long count = carsRepository.findAll().stream().filter(e -> e.getPlateNumber().equals(plate)).count();
+
+        if (count == 0)
+            carsRepository.save(new CarsDto(owner, plate.toUpperCase()).getCars());
+        else
+            return "redirect:/error";
         return "redirect:/add_car?add";
     }
 

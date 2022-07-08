@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import pl.apserwis.ap.comp.MapSortComp;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
-import pl.apserwis.ap.repository.CarsRepository;
-import pl.apserwis.ap.repository.PeopleRepository;
-import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.repository.CarsRepository;
+import pl.apserwis.ap.service.repository.PeopleRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 import pl.apserwis.ap.service.PeopleService;
 
 import java.util.*;
@@ -44,6 +44,7 @@ public class PeopleServiceImpl implements PeopleService {
             map.put("name", p.getName() + " " + p.getSureName());
             map.put("phone", p.getPhone());
             map.put("cars", String.valueOf(carsList.size()));
+            map.put("id", p.getId().toString());
 
             for (Cars c : carsList){
                 workCount += workRepository.findByCars(c).size();

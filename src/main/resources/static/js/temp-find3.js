@@ -1,11 +1,8 @@
 window.onload = start;
 
 
-var plateInput;
-var nameInput;
-
-var plateIndex;
-var nameIndex;
+var plateInput = "";
+var nameInput = "";
 
 var page = 0;
 var pageSize = 10;
@@ -56,6 +53,7 @@ function clearFindFlag() {
 }
 
 function start(){
+
 counter = document.getElementById("pageCounter");
 counter.innerHTML = page;
 reworkTable();
@@ -64,9 +62,12 @@ $.getJSON('http://localhost:8080/allcars', function(data){
     for (var i = 0; i < data.length; i++){
         var select = document.getElementById('car');
         var opt = document.createElement('option');
-            opt.value = data[i].id;
+//            opt.value = data[i].id;
+           $(opt).attr('data-id', data[i].id);
+           //alert($(opt).data('value'));
         var name = data[i].plateNumber;
-            opt.innerHTML = name;
+//            opt.innerHTML = name;
+            opt.value = name;
         select.appendChild(opt);
     }
       });
@@ -79,9 +80,11 @@ $.getJSON('http://localhost:8080/allpeople', function(data){
     for (var i = 0; i < data.length; i++){
         var select = document.getElementById('name');
         var opt = document.createElement('option');
-            opt.value = data[i].id;
+//            opt.data = data[i].id;
+            $(opt).attr('data-id', data[i].id);
         var name = data[i].name +" "+ data[i].sureName;
-            opt.innerHTML = name;
+//            opt.innerHTML = name;
+            opt.value = name;
         select.appendChild(opt);
     }
       });
@@ -162,12 +165,27 @@ endDate = document.getElementById('endDate').value;
     });
 
 }
-function search(){
-    plateInput = document.getElementById('car').value;
-    nameInput = document.getElementById('name').value;
 
-    plateIndex = document.getElementById("car").selectedIndex = 0;
-    nameIndex = document.getElementById("name").selectedIndex = 0;
+function getDataListSelectedOption(txt_input, data_list_options)
+{
+var shownVal = document.getElementById(txt_input).value;
+var value2send = document.querySelector("#" + data_list_options + " option[value='" + shownVal + "']").dataset.id;
+            return value2send;
+}
+
+function search(){
+
+    plateInput = "";
+    nameInput = "";
+
+    if (!(document.getElementById('car2').value == ""))
+        plateInput = getDataListSelectedOption('car2', 'car');
+
+    if (!(document.getElementById('name2').value == ""))
+        nameInput = getDataListSelectedOption('name2', 'name');
+
+    document.getElementById("car2").value = "";
+    document.getElementById("name2").value = "";
 
     page = 0;
 
@@ -185,7 +203,6 @@ function search(){
         $("#table #tr").remove();
         findAllWorks();
     }
-
 }
 
 function loadWork() {
@@ -388,8 +405,16 @@ function changeVisible() {
 }
 
 function deleteWorkRow(id){
-    if(deleteBool)
-        alert(id);
+    if(deleteBool) {
+         $.ajax({
+                url: 'http://localhost:8080/work/'+id,
+                type: 'DELETE',
+                success: function(result) {
+                    $("#table #tr").remove();
+                    loadWork();
+                }
+            });
+    }
 }
 
 function deleteMode(){
@@ -401,28 +426,26 @@ function deleteMode(){
 }
 
 function disableAll() {
-
-if(deleteBool) {
-    $("#topMenu *").prop('disabled',true);
-    $("#searchMenu *").prop('disabled',true);
-    $("#topTable *").prop('disabled',true);
-    $("#botTable *").prop('disabled',true);
-    document.getElementById("delBtn").disabled = false;
-    $('html').css("background-color","#583f3f");
-    $('body').css({'cssText': 'background-color: #583f3f !important'});
-    $("#hideId").hide();
-    $("#hideThis").hide();
-    visablePanel = true;
-} else {
-    $("#topMenu *").prop('disabled',false);
-    $("#searchMenu *").prop('disabled',false);
-    $("#topTable *").prop('disabled',false);
-    $("#botTable *").prop('disabled',false);
-    $('html').css("background-color","#5c5c5c");
-    $('body').css({'cssText': 'background-color: #5c5c5c !important'});
-    $("#hideId").show();
-    $("#hideThis").show();
-    visablePanel = false;
-}
-
+    if(deleteBool) {
+        $("#topMenu *").prop('disabled',true);
+        $("#searchMenu *").prop('disabled',true);
+        $("#topTable *").prop('disabled',true);
+        $("#botTable *").prop('disabled',true);
+        document.getElementById("delBtn").disabled = false;
+        $('html').css("background-color","#583f3f");
+        $('body').css({'cssText': 'background-color: #583f3f !important'});
+        $("#hideId").hide();
+        $("#hideThis").hide();
+        visablePanel = true;
+    } else {
+        $("#topMenu *").prop('disabled',false);
+        $("#searchMenu *").prop('disabled',false);
+        $("#topTable *").prop('disabled',false);
+        $("#botTable *").prop('disabled',false);
+        $('html').css("background-color","#5c5c5c");
+        $('body').css({'cssText': 'background-color: #5c5c5c !important'});
+        $("#hideId").show();
+        $("#hideThis").show();
+        visablePanel = false;
+    }
 }

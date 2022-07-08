@@ -94,7 +94,7 @@ $.getJSON('http://localhost:8080/allcar/'+page+'/'+pageSize, {sql:sqlFlag, key:k
           phone = data.content[i].name;
           cars = data.content[i].phone;
           works = data.content[i].works;
-          rowBuilder();
+          rowBuilder(data.content[i].id);
           $("#table").append(row);
           reworkTable();
     }
@@ -136,8 +136,8 @@ function reworkTable() {
     }
 }
 
-function rowBuilder() {
-    row = "<tr id='tr' class='tr'><td id='oneColumn'>" +
+function rowBuilder(id) {
+    row = "<tr id='tr' class='tr' onClick='deleteWorkRow(" + id + ")'><td id='oneColumn'>" +
     name + "</td><td id='twoColumn'>" +
     phone + "</td><td id='threeColumn'>" +
     cars + "</td><td id='fourColumn'>" +
@@ -165,5 +165,43 @@ function minusPage() {
         $("#table #tr").remove();
         page = page-1;
         useGoodSearch(sqlFlag);
+    }
+}
+
+var deleteBool = false;
+var hidePanel = false;
+
+function deleteMode(){
+    if(deleteBool)
+        deleteBool = false;
+    else
+        deleteBool = true;
+    disableAll();
+}
+
+function disableAll() {
+    if(hidePanel) {
+        $('html').css("background-color","#5c5c5c");
+        $('body').css({'cssText': 'background-color: #5c5c5c !important'});
+        $("#hideId").show();
+        hidePanel = false;
+    } else {
+        $('html').css("background-color","#583f3f");
+        $('body').css({'cssText': 'background-color: #583f3f !important'});
+        $("#hideId").hide();
+        hidePanel = true;
+    }
+}
+
+function deleteWorkRow(id){
+    if(deleteBool) {
+         $.ajax({
+                url: 'http://localhost:8080/car/'+id,
+                type: 'DELETE',
+                success: function(result) {
+                    $("#table #tr").remove();
+                    findUserWithSql(sqlFlag);
+                }
+            });
     }
 }

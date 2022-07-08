@@ -7,9 +7,9 @@ import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
-import pl.apserwis.ap.repository.CarsRepository;
-import pl.apserwis.ap.repository.PeopleRepository;
-import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.repository.CarsRepository;
+import pl.apserwis.ap.service.repository.PeopleRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 
 
 @Component

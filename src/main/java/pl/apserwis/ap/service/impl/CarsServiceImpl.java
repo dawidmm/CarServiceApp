@@ -6,8 +6,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import pl.apserwis.ap.comp.MapSortForCarsComp;
 import pl.apserwis.ap.entity.Cars;
-import pl.apserwis.ap.repository.CarsRepository;
-import pl.apserwis.ap.repository.WorkRepository;
+import pl.apserwis.ap.service.repository.CarsRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 import pl.apserwis.ap.service.CarsService;
 
 import java.util.ArrayList;
@@ -38,6 +38,7 @@ public class CarsServiceImpl implements CarsService {
             map.put("name", c.getPeople().getName()+" "+c.getPeople().getSureName());
             map.put("phone", c.getPeople().getPhone());
             map.put("works", String.valueOf(workRepository.findByCars(c).size()));
+            map.put("id", c.getId().toString());
 
             endMapList.add(map);
         }
