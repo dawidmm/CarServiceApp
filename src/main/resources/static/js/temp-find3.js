@@ -52,112 +52,126 @@ function clearFindFlag() {
     allFlag = false;
 }
 
-function start(){
+function start() {
 
-counter = document.getElementById("pageCounter");
-counter.innerHTML = page;
-reworkTable();
+    counter = document.getElementById("pageCounter");
+    counter.innerHTML = page;
+    reworkTable();
 
-$.getJSON('http://localhost:8080/allcars', function(data){
-    for (var i = 0; i < data.length; i++){
-        var select = document.getElementById('car');
-        var opt = document.createElement('option');
+    $.getJSON('http://localhost:8080/allcars', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var select = document.getElementById('car');
+            var opt = document.createElement('option');
 //            opt.value = data[i].id;
-           $(opt).attr('data-id', data[i].id);
-           //alert($(opt).data('value'));
-        var name = data[i].plateNumber;
+            $(opt).attr('data-id', data[i].id);
+            //alert($(opt).data('value'));
+            var name = data[i].plateNumber;
 //            opt.innerHTML = name;
             opt.value = name;
-        select.appendChild(opt);
-    }
-      });
-          start2();
+            select.appendChild(opt);
+        }
+    });
+    start2();
 }
 
-function start2(){
-counter.innerHTML = page;
-$.getJSON('http://localhost:8080/allpeople', function(data){
-    for (var i = 0; i < data.length; i++){
-        var select = document.getElementById('name');
-        var opt = document.createElement('option');
+function start2() {
+    counter.innerHTML = page;
+    $.getJSON('http://localhost:8080/allpeople', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var select = document.getElementById('name');
+            var opt = document.createElement('option');
 //            opt.data = data[i].id;
             $(opt).attr('data-id', data[i].id);
-        var name = data[i].name +" "+ data[i].sureName;
+            var name = data[i].name + " " + data[i].sureName;
 //            opt.innerHTML = name;
             opt.value = name;
-        select.appendChild(opt);
-    }
-      });
+            select.appendChild(opt);
+        }
+    });
 }
 
-function findWithPlate(sqlFlag){
-counter.innerHTML = page;
+function findWithPlate(sqlFlag) {
+    counter.innerHTML = page;
 
-startDate = document.getElementById('startDate').value;
-endDate = document.getElementById('endDate').value;
+    startDate = document.getElementById('startDate').value;
+    endDate = document.getElementById('endDate').value;
 
-$.getJSON('http://localhost:8080/workwithplate/'+page+'/'+pageSize, {id:plateInput, sql:sqlFlag, sdate:startDate, edate:endDate}, function(data){
-    for (var i = 0; i < data.content.length; i++){
-          name = data.content[i].cars.people.name + '<br>' + data.content[i].cars.people.sureName;
-          phone = data.content[i].cars.people.phone;
-          cars = data.content[i].cars.plateNumber;
-          description = data.content[i].description;
-          price = data.content[i].price + "";
-          date = data.content[i].date;
-          rowBuilder(data.content[i].id);
+    $.getJSON('http://localhost:8080/workwithplate/' + page + '/' + pageSize, {
+        id: plateInput,
+        sql: sqlFlag,
+        sdate: startDate,
+        edate: endDate
+    }, function (data) {
+        for (var i = 0; i < data.content.length; i++) {
+            name = data.content[i].cars.people.name + '<br>' + data.content[i].cars.people.sureName;
+            phone = data.content[i].cars.people.phone;
+            cars = data.content[i].cars.plateNumber;
+            description = data.content[i].description;
+            price = data.content[i].price + "";
+            date = data.content[i].date;
+            rowBuilder(data.content[i].id);
 //          row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
-          $("#table").append(row);
-          reworkTable();
-    }
-    clearFindFlag();
-    plateFlag = true;
+            $("#table").append(row);
+            reworkTable();
+        }
+        clearFindFlag();
+        plateFlag = true;
 
-});
+    });
 }
 
-function findWithName(sqlFlag){
-counter.innerHTML = page;
+function findWithName(sqlFlag) {
+    counter.innerHTML = page;
 
-startDate = document.getElementById('startDate').value;
-endDate = document.getElementById('endDate').value;
+    startDate = document.getElementById('startDate').value;
+    endDate = document.getElementById('endDate').value;
 
-$.getJSON('http://localhost:8080/workwithname/'+page+'/'+pageSize, {id:nameInput, sql:sqlFlag, sdate:startDate, edate:endDate}, function(data){
-    for (var i = 0; i < data.content.length; i++){
-          name = data.content[i].cars.people.name + '<br>' + data.content[i].cars.people.sureName;
-          phone = data.content[i].cars.people.phone;
-          cars = data.content[i].cars.plateNumber;
-          description = data.content[i].description;
-          price = data.content[i].price + "";
-          date = data.content[i].date;
-          rowBuilder(data.content[i].id);
+    $.getJSON('http://localhost:8080/workwithname/' + page + '/' + pageSize, {
+        id: nameInput,
+        sql: sqlFlag,
+        sdate: startDate,
+        edate: endDate
+    }, function (data) {
+        for (var i = 0; i < data.content.length; i++) {
+            name = data.content[i].cars.people.name + '<br>' + data.content[i].cars.people.sureName;
+            phone = data.content[i].cars.people.phone;
+            cars = data.content[i].cars.plateNumber;
+            description = data.content[i].description;
+            price = data.content[i].price + "";
+            date = data.content[i].date;
+            rowBuilder(data.content[i].id);
 //          row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
-          $("#table").append(row);
-          reworkTable();
-    }
-    clearFindFlag();
-    nameFlag = true;
+            $("#table").append(row);
+            reworkTable();
+        }
+        clearFindFlag();
+        nameFlag = true;
 
-});
+    });
 }
 
-function findAllWorks(sqlFlag){
-counter.innerHTML = page;
+function findAllWorks(sqlFlag) {
+    counter.innerHTML = page;
 
-startDate = document.getElementById('startDate').value;
-endDate = document.getElementById('endDate').value;
+    startDate = document.getElementById('startDate').value;
+    endDate = document.getElementById('endDate').value;
 
-    $.getJSON('http://localhost:8080/allworks/'+page+'/'+pageSize, {sql:sqlFlag, sdate:startDate, edate:endDate}, function(data){
-        for (var i = 0; i < data.content.length; i++){
-              name = data.content[i].cars.people.name + '<br>' + data.content[i].cars.people.sureName;
-              phone = data.content[i].cars.people.phone;
-              cars = data.content[i].cars.plateNumber;
-              description = data.content[i].description;
-              price = data.content[i].price + "";
-              date = data.content[i].date;
-              rowBuilder(data.content[i].id);
+    $.getJSON('http://localhost:8080/allworks/' + page + '/' + pageSize, {
+        sql: sqlFlag,
+        sdate: startDate,
+        edate: endDate
+    }, function (data) {
+        for (var i = 0; i < data.content.length; i++) {
+            name = data.content[i].cars.people.name + '<br>' + data.content[i].cars.people.sureName;
+            phone = data.content[i].cars.people.phone;
+            cars = data.content[i].cars.plateNumber;
+            description = data.content[i].description;
+            price = data.content[i].price + "";
+            date = data.content[i].date;
+            rowBuilder(data.content[i].id);
 //              row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
-              $("#table").append(row);
-              reworkTable();
+            $("#table").append(row);
+            reworkTable();
         }
         clearFindFlag();
         allFlag = true;
@@ -166,14 +180,13 @@ endDate = document.getElementById('endDate').value;
 
 }
 
-function getDataListSelectedOption(txt_input, data_list_options)
-{
-var shownVal = document.getElementById(txt_input).value;
-var value2send = document.querySelector("#" + data_list_options + " option[value='" + shownVal + "']").dataset.id;
-            return value2send;
+function getDataListSelectedOption(txt_input, data_list_options) {
+    var shownVal = document.getElementById(txt_input).value;
+    var value2send = document.querySelector("#" + data_list_options + " option[value='" + shownVal + "']").dataset.id;
+    return value2send;
 }
 
-function search(){
+function search() {
 
     plateInput = "";
     nameInput = "";
@@ -189,33 +202,33 @@ function search(){
 
     page = 0;
 
-    if(plateInput == "" & nameInput != ""){
+    if (plateInput == "" & nameInput != "") {
         $("#table #tr").remove();
         findWithName();
     }
 
-    if(plateInput != "" & nameInput == ""){
+    if (plateInput != "" & nameInput == "") {
         $("#table #tr").remove();
         findWithPlate();
     }
 
-    if(plateInput == "" & nameInput == ""){
+    if (plateInput == "" & nameInput == "") {
         $("#table #tr").remove();
         findAllWorks();
     }
 }
 
 function loadWork() {
-    if(plateInput == "" & nameInput != ""){
-            findWithName(sqlFlag);
-        }
+    if (plateInput == "" & nameInput != "") {
+        findWithName(sqlFlag);
+    }
 
-        if(plateInput != "" & nameInput == ""){
-                findWithPlate(sqlFlag);
-            }
-    if(plateInput == "" & nameInput == ""){
-            findAllWorks(sqlFlag);
-        }
+    if (plateInput != "" & nameInput == "") {
+        findWithPlate(sqlFlag);
+    }
+    if (plateInput == "" & nameInput == "") {
+        findAllWorks(sqlFlag);
+    }
 }
 
 function plusPage() {
@@ -223,7 +236,7 @@ function plusPage() {
 
     if (getPageRow > pageSize) {
         $("#table #tr").remove();
-        page = page+1;
+        page = page + 1;
         loadWork();
     }
 }
@@ -231,7 +244,7 @@ function plusPage() {
 function minusPage() {
     if (page != 0) {
         $("#table #tr").remove();
-        page = page-1;
+        page = page - 1;
         loadWork();
     }
 }
@@ -290,12 +303,12 @@ function reworkTable() {
 
 function rowBuilder(id) {
     row = "<tr id='tr' class='tr' onClick='deleteWorkRow(" + id + ")'><td id='oneColumn'>" +
-    name + "</td><td id='twoColumn'>" +
-    phone + "</td><td id='threeColumn'>" +
-    cars + "</td><td id='fourColumn' class='td-breaker'>" +
-    description + "</td><td id='fiveColumn'>" +
-    price + "</td><td id='sixColumn'>" +
-    date + "</td></tr>";
+        name + "</td><td id='twoColumn'>" +
+        phone + "</td><td id='threeColumn'>" +
+        cars + "</td><td id='fourColumn' class='td-breaker'>" +
+        description + "</td><td id='fiveColumn'>" +
+        price + "</td><td id='sixColumn'>" +
+        date + "</td></tr>";
 }
 
 function oneTh() {
@@ -393,7 +406,7 @@ function useGoodSearch(sqlArgs) {
 }
 
 function changeVisible() {
-    if(visablePanel) {
+    if (visablePanel) {
         $("#hideId").show();
         $("#hideThis").show();
         visablePanel = false;
@@ -404,21 +417,21 @@ function changeVisible() {
     }
 }
 
-function deleteWorkRow(id){
-    if(deleteBool) {
-         $.ajax({
-                url: 'http://localhost:8080/work/'+id,
-                type: 'DELETE',
-                success: function(result) {
-                    $("#table #tr").remove();
-                    loadWork();
-                }
-            });
+function deleteWorkRow(id) {
+    if (deleteBool) {
+        $.ajax({
+            url: 'http://localhost:8080/work/' + id,
+            type: 'DELETE',
+            success: function (result) {
+                $("#table #tr").remove();
+                loadWork();
+            }
+        });
     }
 }
 
-function deleteMode(){
-    if(deleteBool)
+function deleteMode() {
+    if (deleteBool)
         deleteBool = false;
     else
         deleteBool = true;
@@ -426,23 +439,23 @@ function deleteMode(){
 }
 
 function disableAll() {
-    if(deleteBool) {
-        $("#topMenu *").prop('disabled',true);
-        $("#searchMenu *").prop('disabled',true);
-        $("#topTable *").prop('disabled',true);
-        $("#botTable *").prop('disabled',true);
+    if (deleteBool) {
+        $("#topMenu *").prop('disabled', true);
+        $("#searchMenu *").prop('disabled', true);
+        $("#topTable *").prop('disabled', true);
+        $("#botTable *").prop('disabled', true);
         document.getElementById("delBtn").disabled = false;
-        $('html').css("background-color","#583f3f");
+        $('html').css("background-color", "#583f3f");
         $('body').css({'cssText': 'background-color: #583f3f !important'});
         $("#hideId").hide();
         $("#hideThis").hide();
         visablePanel = true;
     } else {
-        $("#topMenu *").prop('disabled',false);
-        $("#searchMenu *").prop('disabled',false);
-        $("#topTable *").prop('disabled',false);
-        $("#botTable *").prop('disabled',false);
-        $('html').css("background-color","#5c5c5c");
+        $("#topMenu *").prop('disabled', false);
+        $("#searchMenu *").prop('disabled', false);
+        $("#topTable *").prop('disabled', false);
+        $("#botTable *").prop('disabled', false);
+        $('html').css("background-color", "#5c5c5c");
         $('body').css({'cssText': 'background-color: #5c5c5c !important'});
         $("#hideId").show();
         $("#hideThis").show();

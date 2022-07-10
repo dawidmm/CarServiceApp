@@ -83,22 +83,22 @@ function useGoodSearch(sqlArgs) {
     findUserWithSql(sqlFlag);
 }
 
-function findUserWithSql(sqlFlag){
-counter.innerHTML = page;
-key = document.getElementById('search-user').value;
-$("#table #tr").remove();
-$.getJSON('http://localhost:8080/allpeople/'+page+'/'+pageSize, {sql:sqlFlag, key:key}, function(data){
+function findUserWithSql(sqlFlag) {
+    counter.innerHTML = page;
+    key = document.getElementById('search-user').value;
+    $("#table #tr").remove();
+    $.getJSON('http://localhost:8080/allpeople/' + page + '/' + pageSize, {sql: sqlFlag, key: key}, function (data) {
 
-    for (var i = 0; i < data.content.length; i++){
-          name = data.content[i].name;
-          phone = data.content[i].phone;
-          cars = data.content[i].cars;
-          works = data.content[i].works;
-          rowBuilder(data.content[i].id);
-          $("#table").append(row);
-          reworkTable();
-    }
-});
+        for (var i = 0; i < data.content.length; i++) {
+            name = data.content[i].name;
+            phone = data.content[i].phone;
+            cars = data.content[i].cars;
+            works = data.content[i].works;
+            rowBuilder(data.content[i].id);
+            $("#table").append(row);
+            reworkTable();
+        }
+    });
 }
 
 function reworkTable() {
@@ -138,10 +138,10 @@ function reworkTable() {
 
 function rowBuilder(id) {
     row = "<tr id='tr' class='tr' onClick='deleteWorkRow(" + id + ")'><td id='oneColumn'>" +
-    name + "</td><td id='twoColumn'>" +
-    phone + "</td><td id='threeColumn'>" +
-    cars + "</td><td id='fourColumn'>" +
-    works + "</td></tr>";
+        name + "</td><td id='twoColumn'>" +
+        phone + "</td><td id='threeColumn'>" +
+        cars + "</td><td id='fourColumn'>" +
+        works + "</td></tr>";
 }
 
 function findUser() {
@@ -155,7 +155,7 @@ function plusPage() {
 
     if (getPageRow > pageSize) {
         $("#table #tr").remove();
-        page = page+1;
+        page = page + 1;
         useGoodSearch(sqlFlag);
     }
 }
@@ -163,7 +163,7 @@ function plusPage() {
 function minusPage() {
     if (page != 0) {
         $("#table #tr").remove();
-        page = page-1;
+        page = page - 1;
         useGoodSearch(sqlFlag);
     }
 }
@@ -171,8 +171,8 @@ function minusPage() {
 var deleteBool = false;
 var hidePanel = false;
 
-function deleteMode(){
-    if(deleteBool)
+function deleteMode() {
+    if (deleteBool)
         deleteBool = false;
     else
         deleteBool = true;
@@ -180,28 +180,28 @@ function deleteMode(){
 }
 
 function disableAll() {
-    if(hidePanel) {
-        $('html').css("background-color","#5c5c5c");
+    if (hidePanel) {
+        $('html').css("background-color", "#5c5c5c");
         $('body').css({'cssText': 'background-color: #5c5c5c !important'});
         $("#hideId").show();
         hidePanel = false;
     } else {
-        $('html').css("background-color","#583f3f");
+        $('html').css("background-color", "#583f3f");
         $('body').css({'cssText': 'background-color: #583f3f !important'});
         $("#hideId").hide();
         hidePanel = true;
     }
 }
 
-function deleteWorkRow(id){
-    if(deleteBool) {
-         $.ajax({
-                url: 'http://localhost:8080/people/'+id,
-                type: 'DELETE',
-                success: function(result) {
-                    $("#table #tr").remove();
-                    findUserWithSql(sqlFlag);
-                }
-            });
+function deleteWorkRow(id) {
+    if (deleteBool) {
+        $.ajax({
+            url: 'http://localhost:8080/people/' + id,
+            type: 'DELETE',
+            success: function (result) {
+                $("#table #tr").remove();
+                findUserWithSql(sqlFlag);
+            }
+        });
     }
 }
