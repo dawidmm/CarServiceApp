@@ -6,9 +6,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import pl.apserwis.ap.comp.MapSortForCarsComp;
 import pl.apserwis.ap.entity.Cars;
+import pl.apserwis.ap.service.CarsService;
 import pl.apserwis.ap.service.repository.CarsRepository;
 import pl.apserwis.ap.service.repository.WorkRepository;
-import pl.apserwis.ap.service.CarsService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class CarsServiceImpl implements CarsService {
     @Override
     public Page<Map<String, String>> findAllCarWithParam(int page, int pageSize, String sql, String key) {
         List<Cars> carsList = carsRepository.findAll().stream()
-                .filter(f -> f.getPlateNumber().contains(key.toUpperCase()))
+                .filter(f -> f.getPlateNumber().contains(key.toUpperCase()) || f.getVin().contains(key.toUpperCase()))
                 .collect(Collectors.toList());
 
         Map<String, String> map;
@@ -35,9 +35,10 @@ public class CarsServiceImpl implements CarsService {
         for (Cars c : carsList) {
             map = new HashMap<>();
             map.put("plate", c.getPlateNumber());
-            map.put("name", c.getPeople().getName()+" "+c.getPeople().getSureName());
+            map.put("name", c.getPeople().getName() + " " + c.getPeople().getSureName());
             map.put("phone", c.getPeople().getPhone());
             map.put("works", String.valueOf(workRepository.findByCars(c).size()));
+            map.put("vin", c.getVin());
             map.put("id", c.getId().toString());
 
             endMapList.add(map);

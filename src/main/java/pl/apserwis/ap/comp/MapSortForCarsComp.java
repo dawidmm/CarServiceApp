@@ -43,6 +43,10 @@ public class MapSortForCarsComp implements Comparator<Map<String, String>> {
                 if (sortChar.equals("+"))
                     return o1.get("works").compareToIgnoreCase(o2.get("works"));
                 return o2.get("works").compareToIgnoreCase(o1.get("works"));
+            case 5:
+                if (sortChar.equals("+"))
+                    return o1.get("vin").compareToIgnoreCase(o2.get("vin"));
+                return o2.get("vin").compareToIgnoreCase(o1.get("vin"));
         }
         return 0;
     }

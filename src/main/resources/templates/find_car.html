@@ -47,7 +47,8 @@
             <!-- name -->
 
             <div class="form-group container d-flex justify-content-center p-2">
-                <input type="text" id="search-user" placeholder="Wpisz numer vin lub rejestrację..." th:oninput="findUser()"
+                <input type="text" id="search-user" placeholder="Wpisz numer vin lub rejestrację..."
+                       th:oninput="findUser()"
                        class="rounded p-2 d-flex w-100" required>
             </div>
 
@@ -73,6 +74,11 @@
                 <input type="checkbox" value="test" id="opis" class="mx-auto m-1 input-dewis input-dewis-size" Checked
                        th:onClick="reworkTable()">
             </div>
+            <div class="d-flex flex-column">
+                <label for="vin" class="input-dewis">Vin</label>
+                <input type="checkbox" value="test" id="vin" class="mx-auto m-1 input-dewis input-dewis-size" Checked
+                       th:onClick="reworkTable()">
+            </div>
         </div>
     </div>
     <button type="button" class="btn btn-danger" th:onClick="deleteMode()" id="delBtn">Usuń</button>
@@ -84,6 +90,7 @@
         <table id="table" class="table">
             <tr>
                 <th id="thImie" class="rounded" th:onClick="oneTh()">Rejestracja</th>
+                <th id="thVin" class="rounded" th:onClick="fiveTh()">Vin</th>
                 <th id="thKontakt" class="rounded" th:onClick="twoTh()">Imie właściciela</th>
                 <th id="thRejestracja" class="rounded" th:onClick="threeTh()">Kontakt</th>
                 <th id="thCena" class="rounded" th:onClick="fourTh()">Ilość zleceń</th>

@@ -11,7 +11,6 @@ import pl.apserwis.ap.service.repository.WorkRepository;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 public class Route {
@@ -100,11 +99,11 @@ public class Route {
     }
 
     @PostMapping("/add_car")
-    public String addCar(Long owner, String plate) {
+    public String addCar(Long owner, String plate, String vin) {
         long count = carsRepository.findAll().stream().filter(e -> e.getPlateNumber().equals(plate)).count();
 
         if (count == 0)
-            carsRepository.save(new CarsDto(owner, plate.toUpperCase()).getCars());
+            carsRepository.save(new CarsDto(owner, plate.toUpperCase(), vin.toUpperCase()).getCars());
         else
             return "redirect:/error";
         return "redirect:/add_car?add";

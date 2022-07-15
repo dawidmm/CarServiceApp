@@ -8,9 +8,10 @@ import pl.apserwis.ap.entity.People;
 public class CarsDto extends Cars {
     Long id;
     String plate;
+    String vin;
 
 
-    public Cars getCars(){
+    public Cars getCars() {
         Cars cars = new Cars();
         People people = new People();
 
@@ -18,6 +19,7 @@ public class CarsDto extends Cars {
 
         cars.setPeople(people);
         cars.setPlateNumber(plate);
+        cars.setVin(vin);
 
         return cars;
     }

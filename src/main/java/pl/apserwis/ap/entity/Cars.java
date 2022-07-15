@@ -20,12 +20,14 @@ import java.util.Set;
 public class Cars implements Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @NotNull
     private String plateNumber;
+
+    private String vin;
 
     @NotNull
     @ManyToOne

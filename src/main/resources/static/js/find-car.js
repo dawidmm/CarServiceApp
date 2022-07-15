@@ -10,16 +10,19 @@ var one;
 var two;
 var three;
 var four;
+var five;
 
 var name;
 var phone;
 var cars;
 var works;
+var vin;
 
 var oneThCol = false;
 var twoThCol = false;
 var threeThCol = false;
 var fourThCol = false;
+var fiveThCol = false;
 
 var sqlFlag = "";
 var key;
@@ -72,11 +75,24 @@ function fourTh() {
     }
 }
 
+function fiveTh() {
+    if (fiveThCol) {
+        //jezeli juz jest znaznaczone
+        clearTh();
+        useGoodSearch(sqlFlag = '5+');
+    } else {
+        fiveThCol = true;
+        useGoodSearch(sqlFlag = '5-');
+        //jezeli nie byl zaznaczony
+    }
+}
+
 function clearTh() {
     oneThCol = false;
     twoThCol = false;
     threeThCol = false;
     fourThCol = false;
+    fiveThCol = false;
 }
 
 function useGoodSearch(sqlArgs) {
@@ -94,6 +110,7 @@ function findUserWithSql(sqlFlag) {
             phone = data.content[i].name;
             cars = data.content[i].phone;
             works = data.content[i].works;
+            vin = data.content[i].vin;
             rowBuilder(data.content[i].id);
             $("#table").append(row);
             reworkTable();
@@ -106,6 +123,7 @@ function reworkTable() {
     two = document.getElementById('kontakt').checked;
     three = document.getElementById('rejestracja').checked;
     four = document.getElementById('opis').checked;
+    five = document.getElementById('vin').checked;
     if (!one) {
         $("#table #thImie").hide();
         $("#table #oneColumn").hide();
@@ -134,11 +152,19 @@ function reworkTable() {
         $("#table #thCena").show();
         $("#table #fourColumn").show();
     }
+    if (!five) {
+        $("#table #thVin").hide();
+        $("#table #fiveColumn").hide();
+    } else {
+        $("#table #thVin").show();
+        $("#table #fiveColumn").show();
+    }
 }
 
 function rowBuilder(id) {
     row = "<tr id='tr' class='tr' onClick='deleteWorkRow(" + id + ")'><td id='oneColumn'>" +
-        name + "</td><td id='twoColumn'>" +
+        name + "</td><td id='fiveColumn'>" +
+        vin + "</td><td id='twoColumn'>" +
         phone + "</td><td id='threeColumn'>" +
         cars + "</td><td id='fourColumn'>" +
         works + "</td></tr>";

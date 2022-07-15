@@ -3,10 +3,10 @@ package pl.apserwis.ap;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
+import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.service.repository.CarsRepository;
 import pl.apserwis.ap.service.repository.PeopleRepository;
 import pl.apserwis.ap.service.repository.WorkRepository;
@@ -33,6 +33,7 @@ public class StartInit {
 
             Cars car = new Cars();
             car.setPlateNumber("SRC XXX" + "" + i);
+            car.setVin("TESTTESTTESTTESTTEST" + i);
             car.setPeople(people);
 
             for (int j = 0; j < 20; j++)
