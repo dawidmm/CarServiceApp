@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,9 +44,13 @@
     <form th:action="@{/add_work}" method="post" id="form" name="form">
 
         <div class="form-group d-flex justify-content-center p-2">
-            <select name="car" id="car" class="rounded">
-                <option value="">Wybierz samochód</option>
-            </select>
+            <!--            <select name="car" id="car" class="rounded">-->
+            <!--                <option value="">Wybierz samochód</option>-->
+            <!--            </select>-->
+            <input list="car" placeholder="Wybierz samochód" id="car2"/>
+            <datalist id="car" class="rounded">
+                <option data-id="0"></option>
+            </datalist>
         </div>
 
 
@@ -70,9 +74,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="container">
-<!--                    <input type="submit" name="submit" id="submit"-->
-<!--                           class="form-control btn btn-success" value="Dodaj samochód">-->
-                    <button type="submit" name="submit" id="submit" class="form-control btn btn-success bg-success btn-color-dewis">
+                    <!--                    <input type="submit" name="submit" id="submit"-->
+                    <!--                           class="form-control btn btn-success" value="Dodaj samochód">-->
+                    <button type="button" th:onclick="postWork()" name="submit" id="submit"
+                            class="form-control btn btn-success bg-success btn-color-dewis">
                         Dodaj zlecenie
                     </button>
                 </div>
@@ -85,6 +90,9 @@
 
     <div th:if="${param.add}">
         <div class="alert alert-success" role="alert">Dodano prawidłowo!</div>
+    </div>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger" role="alert">Niepoprawne dane, spróbuj jeszcze raz.</div>
     </div>
 </div>
 

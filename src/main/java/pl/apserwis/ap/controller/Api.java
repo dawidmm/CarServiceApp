@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
-import pl.apserwis.ap.service.repository.CarsRepository;
-import pl.apserwis.ap.service.repository.PeopleRepository;
-import pl.apserwis.ap.service.repository.WorkRepository;
+import pl.apserwis.ap.entity.dto.CarsDto;
+import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.service.CarsService;
 import pl.apserwis.ap.service.PeopleService;
 import pl.apserwis.ap.service.WorkService;
+import pl.apserwis.ap.service.repository.CarsRepository;
+import pl.apserwis.ap.service.repository.PeopleRepository;
+import pl.apserwis.ap.service.repository.WorkRepository;
 
-import java.util.*;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -153,5 +158,41 @@ public class Api {
     public void deleteWork(@PathVariable("id") Long id) {
         var work = workRepository.findById(id);
         work.ifPresent(cars -> workRepository.delete(work.get()));
+    }
+
+    @PostMapping("/add_car")
+    public int addCar(Long owner, String plate, String vin) {
+        long count = carsRepository.findAll().stream().filter(e -> e.getPlateNumber().equals(plate.toUpperCase()) || e.getVin().equals(vin.toUpperCase())).count();
+
+        if (plate.isEmpty())
+            return 500;
+
+        if (count == 0)
+            try {
+                carsRepository.save(new CarsDto(owner, plate.toUpperCase(), vin.toUpperCase()).getCars());
+            } catch (Exception e) {
+                return 500;
+            }
+        else
+            return 500;
+        return 200;
+    }
+
+    @PostMapping("/add_work")
+    public int addWork(Long car, String price, String desc) {
+        if (car == null || price.isEmpty() || desc.isEmpty())
+            return 500;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Timestamp timestamp;
+
+        timestamp = new Timestamp(System.currentTimeMillis());
+        String[] date = sdf.format(timestamp).split(" ");
+        try {
+            workRepository.save(new WorkDto(car, price, desc, date[0] + "<br>" + date[1]).getWork());
+        } catch (Exception e) {
+            return 500;
+        }
+        return 200;
     }
 }

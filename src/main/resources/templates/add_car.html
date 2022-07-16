@@ -46,9 +46,13 @@
         <!-- owner -->
 
         <div class="form-group d-flex justify-content-center p-2">
-            <select name="owner" id="owner" class="rounded">
-                <option value="">Wybierz Klienta</option>
-            </select>
+            <!--            <select name="owner" id="owner" class="rounded">-->
+            <!--                <option value="">Wybierz Klienta</option>-->
+            <!--            </select>-->
+            <input list="owner" placeholder="Wybierz klienta" id="owner2"/>
+            <datalist id="owner" class="rounded">
+                <option data-id="0"></option>
+            </datalist>
         </div>
 
         <!-- name -->
@@ -75,7 +79,8 @@
                 <div class="container">
                     <!--                    <input type="submit" name="submit" id="submit"-->
                     <!--                           class="form-control btn btn-success" value="Dodaj samochód">-->
-                    <button type="submit" name="submit" id="submit" class="form-control btn btn-success bg-success">
+                    <button type="button" th:onclick="postCar()" name="submit" id="submit"
+                            class="form-control btn btn-success bg-success">
                         Dodaj samochód
                     </button>
                 </div>
@@ -88,6 +93,9 @@
 
     <div th:if="${param.add}" class="p-2">
         <div class="alert alert-success" role="alert">Dodano prawidłowo!</div>
+    </div>
+    <div th:if="${param.error}" class="p-2">
+        <div class="alert alert-danger" role="alert">Niepoprawne dane, spróbuj jeszcze raz.</div>
     </div>
 </div>
 

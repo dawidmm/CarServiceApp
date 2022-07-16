@@ -2,15 +2,10 @@ package pl.apserwis.ap.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.apserwis.ap.entity.dto.CarsDto;
 import pl.apserwis.ap.entity.dto.PeopleDto;
-import pl.apserwis.ap.entity.dto.WorkDto;
 import pl.apserwis.ap.service.repository.CarsRepository;
 import pl.apserwis.ap.service.repository.PeopleRepository;
 import pl.apserwis.ap.service.repository.WorkRepository;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 @org.springframework.stereotype.Controller
 public class Route {
@@ -24,9 +19,6 @@ public class Route {
         this.carsRepository = carsRepository;
         this.workRepository = workRepository;
     }
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    private Timestamp timestamp;
 
     // *HTML TEMPLATE*
 
@@ -96,24 +88,5 @@ public class Route {
         else
             return "redirect:/error";
         return "redirect:/add?add";
-    }
-
-    @PostMapping("/add_car")
-    public String addCar(Long owner, String plate, String vin) {
-        long count = carsRepository.findAll().stream().filter(e -> e.getPlateNumber().equals(plate)).count();
-
-        if (count == 0)
-            carsRepository.save(new CarsDto(owner, plate.toUpperCase(), vin.toUpperCase()).getCars());
-        else
-            return "redirect:/error";
-        return "redirect:/add_car?add";
-    }
-
-    @PostMapping("/add_work")
-    public String addWork(Long car, String price, String desc) {
-        timestamp = new Timestamp(System.currentTimeMillis());
-        String[] date = sdf.format(timestamp).split(" ");
-        workRepository.save(new WorkDto(car, price, desc, date[0] + "<br>" + date[1]).getWork());
-        return "redirect:/add_work?add";
     }
 }
