@@ -21,7 +21,7 @@ img {
 
 th:hover {
     background-color: #333 !important;
-    color: ;
+    /*color: ;*/
     cursor: pointer;
 }
 
@@ -30,7 +30,7 @@ th:hover {
     height: 15px;
 }
 
-.input-dewis{
+.input-dewis {
     color: black;
     background-color: white;
 }
@@ -57,8 +57,8 @@ select:hover, input:hover {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #5c5c5c !important;
+    font-family: 'Roboto', sans-serif;
+    background-color: #5c5c5c !important;
 }
 
 .td-breaker {
@@ -110,78 +110,82 @@ select, input {
 }
 
 ::placeholder {
-  color: #959595 !important;
-  opacity: 1; /* Firefox */
+    color: #959595 !important;
+    opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
- color: #959595 !important;
+    color: #959595 !important;
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
- color: #959595 !important;
+    color: #959595 !important;
 }
 
 .bg-dewis {
     background-color: #333;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) !important;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1) !important;
 }
 
 .navbar-dewis {
-  overflow: hidden;
-  background-color: #333;
+    overflow: hidden;
+    background-color: #333;
 }
 
 .navbar-dewis a {
-  float: left;
-  font-size: 16px;
-  color: #cbcbcb;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-family: 'Roboto', sans-serif;
+    float: left;
+    font-size: 16px;
+    color: #cbcbcb;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
 }
 
 .dropdown-dewis {
-  float: left;
-  overflow: hidden;
+    float: left;
+    overflow: hidden;
 }
 
 .dropdown-dewis .dropbtn-dewis {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: #cbcbcb;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: #cbcbcb;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
 }
 
 .navbar-dewis a:hover, .dropdown-dewis:hover .dropbtn-dewis {
-  background-color: #5c5c5c;
-  color: white;
+    background-color: #5c5c5c;
+    color: white;
 }
 
 .dropdown-content-dewis {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .dropdown-content-dewis a {
-  float: none;
-  color: #cbcbcb;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
+    float: none;
+    color: #cbcbcb;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
 
 }
 
 .dropdown-dewis:hover .dropdown-content-dewis {
-  display: block;
+    display: block;
+}
+
+.circled {
+    border-radius: 0.25rem;
 }

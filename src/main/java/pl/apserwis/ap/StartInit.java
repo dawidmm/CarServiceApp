@@ -3,10 +3,12 @@ package pl.apserwis.ap;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import pl.apserwis.ap.entity.Calendar;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
 import pl.apserwis.ap.entity.dto.WorkDto;
+import pl.apserwis.ap.service.repository.CalendarRepository;
 import pl.apserwis.ap.service.repository.CarsRepository;
 import pl.apserwis.ap.service.repository.PeopleRepository;
 import pl.apserwis.ap.service.repository.WorkRepository;
@@ -19,6 +21,7 @@ public class StartInit {
     private PeopleRepository p;
     private CarsRepository c;
     private WorkRepository w;
+    private CalendarRepository cal;
 
     @Bean
     public void onStartInit() {
@@ -47,6 +50,13 @@ public class StartInit {
 
             for (int j = 0; j < 20; j++)
                 w.save(new WorkDto(work).getWork());
+
+            Calendar calendar = new Calendar();
+            calendar.setDescription("test" + i);
+            calendar.setDate(i + "-11-2021");
+            calendar.setPlateNumber("" + i + i + i);
+
+            cal.save(calendar);
         }
     }
 }

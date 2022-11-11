@@ -6,11 +6,13 @@ import org.hibernate.annotations.CascadeType;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import pl.apserwis.ap.entity.Calendar;
 import pl.apserwis.ap.entity.Cars;
 import pl.apserwis.ap.entity.People;
 import pl.apserwis.ap.entity.Work;
 import pl.apserwis.ap.entity.dto.CarsDto;
 import pl.apserwis.ap.entity.dto.WorkDto;
+import pl.apserwis.ap.service.CalendarService;
 import pl.apserwis.ap.service.CarsService;
 import pl.apserwis.ap.service.PeopleService;
 import pl.apserwis.ap.service.WorkService;
@@ -32,6 +34,7 @@ public class Api {
     private WorkRepository workRepository;
     private WorkService workService;
     private PeopleService peopleService;
+    private CalendarService calendarService;
 
     @GetMapping("/allpeople")
     public List<People> getAllPeople() {
@@ -194,5 +197,28 @@ public class Api {
             return 500;
         }
         return 200;
+    }
+
+    @GetMapping("/calendar/all")
+    public List<Calendar> getAllCalendar() {
+        return calendarService.getAll();
+    }
+
+    @GetMapping("/calendar/{pageSize}/{page}")
+    public List<Calendar> getAllCalendarWithPaging(@PathVariable("pageSize") int pageSize, @PathVariable("page") int page) {
+        return calendarService.get(pageSize, page);
+    }
+
+    @DeleteMapping("/calendar/{id}")
+    public void deleteById(@PathVariable("id") long id) {
+        calendarService.deleteById(id);
+    }
+
+    @PostMapping("/calendar")
+    public Calendar addCalendar(@RequestParam(value = "desc") String desc,
+                                @RequestParam(value = "plate") String plate,
+                                @RequestParam(value = "date") String date) {
+        Calendar calendar = new Calendar(null, desc, plate, date);
+        return calendarService.save(calendar);
     }
 }
