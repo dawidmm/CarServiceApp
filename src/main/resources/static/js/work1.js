@@ -2,7 +2,7 @@ window.onload = start2;
 
 // function start() {
 //     document.querySelector('#submit').disabled = true;
-//     $.getJSON('http://localhost:8080/allcars', function (data) {
+//     $.getJSON(domain + '/allcars', function (data) {
 //         for (var i = 0; i < data.length; i++) {
 //             var select = document.getElementById('car');
 //             var opt = document.createElement('option');
@@ -23,7 +23,7 @@ function disableBtn() {
 }
 
 function start2() {
-    $.getJSON('http://localhost:8080/allcars', function (data) {
+    $.getJSON(domain + '/allcars', function (data) {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('car');
             var opt = document.createElement('option');
@@ -49,15 +49,15 @@ function postWork() {
     if (!(document.getElementById('car2').value == ""))
         ownerSt = getDataListSelectedOption('car2', 'car');
 
-    $.post("http://localhost:8080/add_work", {
+    $.post(domain + "/add_work", {
         car: ownerSt,
         desc: descSt,
         price: priceSt
     }, function (data) {
         if (data === 200) {
-            window.location.replace("http://localhost:8080/add_work?add");
+            window.location.replace(domain + "/add_work?add");
         } else {
-            window.location.replace("http://localhost:8080/add_work?error");
+            window.location.replace(domain + "/add_work?error");
         }
     });
 

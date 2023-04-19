@@ -8,7 +8,7 @@ function start2() {
 }
 
 function start() {
-    $.getJSON('http://localhost:8080/allpeople', function (data) {
+    $.getJSON(domain + '/allpeople', function (data) {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('people');
             var opt = document.createElement('option');
@@ -25,10 +25,10 @@ function findPeople() {
     id = document.getElementById('people').value;
     $("#tip").show();
 
-    $.getJSON('http://localhost:8080/people/car/' + id, function (data) {
+    $.getJSON(domain + '/people/car/' + id, function (data) {
         document.getElementById("tipDiv").innerHTML = 'Uwaga! Usuniesz ' + data + ' pojazd/ów i ';
 
-        $.getJSON('http://localhost:8080/people/work/' + id, function (data) {
+        $.getJSON(domain + '/people/work/' + id, function (data) {
             document.getElementById("tipDiv").innerHTML = document.getElementById("tipDiv").innerHTML + ' ' + data + ' zleceń powiązasnych z tym użytkownikiem.';
         });
     });
@@ -37,7 +37,7 @@ function findPeople() {
 function deletePeople() {
     if (id > 0) {
         $.ajax({
-            url: 'http://localhost:8080/people/' + id,
+            url: domain + '/people/' + id,
             type: 'DELETE',
             success: function (result) {
                 $("#people #optionId").remove();

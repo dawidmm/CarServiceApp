@@ -1,4 +1,4 @@
-$.getJSON('http://localhost:8080/allworks', function (data) {
+$.getJSON(domain + '/allworks', function (data) {
     for (var i = 0; i < data.length; i++) {
 
         $(document).ready(function () {

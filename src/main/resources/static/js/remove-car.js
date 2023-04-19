@@ -8,7 +8,7 @@ function start2() {
 }
 
 function start() {
-    $.getJSON('http://localhost:8080/allcars', function (data) {
+    $.getJSON(domain + '/allcars', function (data) {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('car');
             var opt = document.createElement('option');
@@ -24,7 +24,7 @@ function findCar() {
     id = document.getElementById('car').value;
     $("#tip").show();
 
-    $.getJSON('http://localhost:8080/car/work/' + id, function (data) {
+    $.getJSON(domain + '/car/work/' + id, function (data) {
         document.getElementById("tipDiv").innerHTML = 'Uwaga! Usuniesz ' + data + ' zleceń!';
     });
 }
@@ -32,7 +32,7 @@ function findCar() {
 function deleteCar() {
     if (id > 0) {
         $.ajax({
-            url: 'http://localhost:8080/car/' + id,
+            url: domain + '/car/' + id,
             type: 'DELETE',
             success: function (result) {
                 $("#car #optionId").remove();

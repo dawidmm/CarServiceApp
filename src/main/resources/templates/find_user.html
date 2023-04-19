@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="js/find-user.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/jquery/jquery.js"></script>
 
     <script src="js/bt/bootstrap.bundle.min.js"></script>
@@ -35,6 +36,7 @@
             <a href="" th:href="@{/add}">Dodaj klienta</a>
             <a href="" th:href="@{/add_car}">Dodaj samochód</a>
             <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+            <a href="" th:href="@{/add_calendar}">Dodaj zlecenie do kalendarza</a>
         </div>
     </div>
 </div>
@@ -64,13 +66,15 @@
                        Checked th:onClick="reworkTable()">
             </div>
             <div class="d-flex flex-column">
-                <label for="rejestracja" class="input-dewis">Rejestracja</label>
-                <input type="checkbox" value="test" id="rejestracja" class="mx-auto m-1 input-dewis input-dewis-size"
+                <label for="ilosc_samochodow" class="input-dewis">Ilość samochodów</label>
+                <input type="checkbox" value="test" id="ilosc_samochodow"
+                       class="mx-auto m-1 input-dewis input-dewis-size"
                        Checked th:onClick="reworkTable()">
             </div>
             <div class="d-flex flex-column">
-                <label for="opis" class="input-dewis">Opis</label>
-                <input type="checkbox" value="test" id="opis" class="mx-auto m-1 input-dewis input-dewis-size" Checked
+                <label for="ilosc_zlecen" class="input-dewis">Ilość zleceń</label>
+                <input type="checkbox" value="test" id="ilosc_zlecen" class="mx-auto m-1 input-dewis input-dewis-size"
+                       Checked
                        th:onClick="reworkTable()">
             </div>
         </div>
@@ -85,8 +89,8 @@
             <tr>
                 <th id="thImie" class="rounded" th:onClick="oneTh()">Imie</th>
                 <th id="thKontakt" class="rounded" th:onClick="twoTh()">Kontakt</th>
-                <th id="thRejestracja" class="rounded" th:onClick="threeTh()">Ilość samochodów</th>
-                <th id="thCena" class="rounded" th:onClick="fourTh()">Ilość zleceń</th>
+                <th id="thIloscSamochodow" class="rounded" th:onClick="threeTh()">Ilość samochodów</th>
+                <th id="thIloscZlecen" class="rounded" th:onClick="fourTh()">Ilość zleceń</th>
             </tr>
         </table>
         <div class="d-flex justify-content-between">

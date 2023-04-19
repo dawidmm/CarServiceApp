@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
-    <script src="js/calendar.js"></script>
+    <script src="js/calendar-add.js"></script>
     <script src="js/config.js"></script>
     <script src="js/jquery/jquery.js"></script>
     <script src="js/bt/bootstrap.bundle.min.js"></script>
@@ -43,24 +43,52 @@
 
 <br>
 
-<div class="container">
-    <div class="justify-content-center rounded bg-dewis">
-        <table id="table" class="table">
-            <thead>
-            <th>Rejestracja</th>
-            <th>Opis</th>
-            <th>Data</th>
-            <th></th>
-            </thead>
-            <tbody>
-            <script></script>
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-between" id="botTable">
-            <img src="img/arrow.png" style="transform: rotate(180deg);" th:onClick="minusPage()" class="rounded p-2">
-            <span id="pageCounter" style="">0</span>
-            <img src="img/arrow.png" th:onClick="plusPage()" class="rounded p-2">
+<div class="container col-md-4 rounded bg-dewis p-3">
+    <form th:action="@{/calendar}" method="post" id="form" name="form">
+
+        <div class="form-group p-2">
+            <label for="desc">Opis: </label>
+            <input type="text" class="form-control" id="desc" name="desc" placeholder="Wpisz opis zlecenia"
+                   autofocus="autofocus" required>
         </div>
+
+        <div class="form-group p-2">
+            <label for="plate">Numer rejestracyjny: </label>
+            <input type="text" class="form-control" id="plate" name="plate" placeholder="Wpisz numer rejestracyjny"
+                   autofocus="autofocus" required>
+        </div>
+
+        <div class="form-group p-2">
+            <label for="date">Data: </label>
+            <input type="date" class="form-control" id="date" name="date" placeholder="Wybierz datę"
+                   autofocus="autofocus" required>
+        </div>
+
+
+        <!-- button -->
+
+        <br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="container">
+                    <button type="button" th:onclick="postCalendar()" name="submit" id="submit"
+                            class="form-control btn btn-success bg-success">
+                        Dodaj do kalendarza
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <br>
+
+    <div th:if="${param.add}" class="p-2">
+        <div class="alert alert-success" role="alert">Dodano prawidłowo!</div>
+    </div>
+    <div th:if="${param.error}" class="p-2">
+        <div class="alert alert-danger" role="alert">Niepoprawne dane, spróbuj jeszcze raz.</div>
     </div>
 </div>
 

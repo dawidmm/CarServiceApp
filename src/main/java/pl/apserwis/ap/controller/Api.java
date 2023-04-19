@@ -215,10 +215,16 @@ public class Api {
     }
 
     @PostMapping("/calendar")
-    public Calendar addCalendar(@RequestParam(value = "desc") String desc,
-                                @RequestParam(value = "plate") String plate,
-                                @RequestParam(value = "date") String date) {
+    public int addCalendar(@RequestParam(value = "desc") String desc,
+                           @RequestParam(value = "plate") String plate,
+                           @RequestParam(value = "date") String date) {
         Calendar calendar = new Calendar(null, desc, plate, date);
-        return calendarService.save(calendar);
+        try {
+            calendarService.save(calendar);
+        } catch (Exception e) {
+            return 500;
+        }
+
+        return 201;
     }
 }

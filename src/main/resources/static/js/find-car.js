@@ -103,7 +103,7 @@ function findUserWithSql(sqlFlag) {
     counter.innerHTML = page;
     key = document.getElementById('search-user').value;
     $("#table #tr").remove();
-    $.getJSON('http://localhost:8080/allcar/' + page + '/' + pageSize, {sql: sqlFlag, key: key}, function (data) {
+    $.getJSON(domain + '/allcar/' + page + '/' + pageSize, {sql: sqlFlag, key: key}, function (data) {
 
         for (var i = 0; i < data.content.length; i++) {
             name = data.content[i].plate;
@@ -222,7 +222,7 @@ function disableAll() {
 function deleteWorkRow(id) {
     if (deleteBool) {
         $.ajax({
-            url: 'http://localhost:8080/car/' + id,
+            url: domain + '/car/' + id,
             type: 'DELETE',
             success: function (result) {
                 $("#table #tr").remove();

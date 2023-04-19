@@ -7,7 +7,7 @@ function start() {
 }
 
 function find() {
-    $.getJSON('http://localhost:8080/calendar/' + 10 + '/' + page, function (data) {
+    $.getJSON(domain + '/calendar/' + 10 + '/' + page, function (data) {
         for (var i = 0; i < data.length; i++) {
             var desc = data[i].description;
             var plate = data[i].plateNumber;
@@ -28,7 +28,7 @@ function deleteById(id) {
     console.log(id);
     if (id > 0) {
         $.ajax({
-            url: 'http://localhost:8080/calendar/' + id,
+            url: domain + '/calendar/' + id,
             type: 'DELETE',
             success: function (result) {
                 $("#table #tr").remove();

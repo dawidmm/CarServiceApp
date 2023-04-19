@@ -58,7 +58,7 @@ function start() {
     counter.innerHTML = page;
     reworkTable();
 
-    $.getJSON('http://localhost:8080/allcars', function (data) {
+    $.getJSON(domain + '/allcars', function (data) {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('car');
             var opt = document.createElement('option');
@@ -76,7 +76,7 @@ function start() {
 
 function start2() {
     counter.innerHTML = page;
-    $.getJSON('http://localhost:8080/allpeople', function (data) {
+    $.getJSON(domain + '/allpeople', function (data) {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('name');
             var opt = document.createElement('option');
@@ -96,7 +96,7 @@ function findWithPlate(sqlFlag) {
     startDate = document.getElementById('startDate').value;
     endDate = document.getElementById('endDate').value;
 
-    $.getJSON('http://localhost:8080/workwithplate/' + page + '/' + pageSize, {
+    $.getJSON(domain + '/workwithplate/' + page + '/' + pageSize, {
         id: plateInput,
         sql: sqlFlag,
         sdate: startDate,
@@ -126,7 +126,7 @@ function findWithName(sqlFlag) {
     startDate = document.getElementById('startDate').value;
     endDate = document.getElementById('endDate').value;
 
-    $.getJSON('http://localhost:8080/workwithname/' + page + '/' + pageSize, {
+    $.getJSON(domain + '/workwithname/' + page + '/' + pageSize, {
         id: nameInput,
         sql: sqlFlag,
         sdate: startDate,
@@ -156,7 +156,7 @@ function findAllWorks(sqlFlag) {
     startDate = document.getElementById('startDate').value;
     endDate = document.getElementById('endDate').value;
 
-    $.getJSON('http://localhost:8080/allworks/' + page + '/' + pageSize, {
+    $.getJSON(domain + '/allworks/' + page + '/' + pageSize, {
         sql: sqlFlag,
         sdate: startDate,
         edate: endDate
@@ -420,7 +420,7 @@ function changeVisible() {
 function deleteWorkRow(id) {
     if (deleteBool) {
         $.ajax({
-            url: 'http://localhost:8080/work/' + id,
+            url: domain + '/work/' + id,
             type: 'DELETE',
             success: function (result) {
                 $("#table #tr").remove();

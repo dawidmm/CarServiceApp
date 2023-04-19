@@ -77,6 +77,11 @@ public class Route {
         return "remove_work";
     }
 
+    @GetMapping("/add_calendar")
+    public String addCalendar() {
+        return "add_calendar";
+    }
+
     // *POST MAPPING*
 
     @PostMapping("/add")

@@ -87,7 +87,7 @@ function findUserWithSql(sqlFlag) {
     counter.innerHTML = page;
     key = document.getElementById('search-user').value;
     $("#table #tr").remove();
-    $.getJSON('http://localhost:8080/allpeople/' + page + '/' + pageSize, {sql: sqlFlag, key: key}, function (data) {
+    $.getJSON(domain + '/allpeople/' + page + '/' + pageSize, {sql: sqlFlag, key: key}, function (data) {
 
         for (var i = 0; i < data.content.length; i++) {
             name = data.content[i].name;
@@ -104,8 +104,8 @@ function findUserWithSql(sqlFlag) {
 function reworkTable() {
     one = document.getElementById('imie').checked;
     two = document.getElementById('kontakt').checked;
-    three = document.getElementById('rejestracja').checked;
-    four = document.getElementById('opis').checked;
+    three = document.getElementById('ilosc_samochodow').checked;
+    four = document.getElementById('ilosc_zlecen').checked;
     if (!one) {
         $("#table #thImie").hide();
         $("#table #oneColumn").hide();
@@ -121,17 +121,17 @@ function reworkTable() {
         $("#table #twoColumn").show();
     }
     if (!three) {
-        $("#table #thRejestracja").hide();
+        $("#table #thIloscSamochodow").hide();
         $("#table #threeColumn").hide();
     } else {
-        $("#table #thRejestracja").show();
+        $("#table #thIloscSamochodow").show();
         $("#table #threeColumn").show();
     }
     if (!four) {
-        $("#table #thOpis").hide();
+        $("#table #thIloscZlecen").hide();
         $("#table #fourColumn").hide();
     } else {
-        $("#table #thOpis").show();
+        $("#table #thIloscZlecen").show();
         $("#table #fourColumn").show();
     }
 }
@@ -196,7 +196,7 @@ function disableAll() {
 function deleteWorkRow(id) {
     if (deleteBool) {
         $.ajax({
-            url: 'http://localhost:8080/people/' + id,
+            url: domain + '/people/' + id,
             type: 'DELETE',
             success: function (result) {
                 $("#table #tr").remove();

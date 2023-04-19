@@ -40,15 +40,15 @@ function postCar() {
     if (!(document.getElementById('owner2').value == ""))
         ownerSt = getDataListSelectedOption('owner2', 'owner');
 
-    $.post("http://localhost:8080/add_car", {
+    $.post(domain + "/add_car", {
         owner: ownerSt,
         plate: plateSt,
         vin: vinSt
     }, function (data) {
         if (data === 200) {
-            window.location.replace("http://localhost:8080/add_car?add");
+            window.location.replace(domain + "/add_car?add");
         } else {
-            window.location.replace("http://localhost:8080/add_car?error");
+            window.location.replace(domain + "/add_car?error");
         }
     });
 

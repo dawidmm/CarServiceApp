@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="js/bt/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/jquery/jquery.js"></script>
 </head>
 <body>
@@ -33,6 +34,7 @@
             <a href="" th:href="@{/add}">Dodaj klienta</a>
             <a href="" th:href="@{/add_car}">Dodaj samochód</a>
             <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+            <a href="" th:href="@{/add_calendar}">Dodaj zlecenie do kalendarza</a>
         </div>
     </div>
 </div>
@@ -60,49 +62,49 @@
 </div>
 
 <script>
-var page = 0;
-var pageSize = 15;
-var getPageRow;
+    var page = 0;
+    var pageSize = 15;
+    var getPageRow;
 
-var counter = document.getElementById("pageCounter");
+    var counter = document.getElementById("pageCounter");
 
 
-window.onload = loadWork;
+    window.onload = loadWork;
 
-function loadWork() {
-    counter.innerHTML = page;
+    function loadWork() {
+        counter.innerHTML = page;
 
-    $.getJSON('http://localhost:8080/allworks/'+page+'/'+pageSize, function(data){
-        for (var i = 0; i < data.length; i++){
-              var name = data[i].cars.people.name + '<br>' + data[i].cars.people.sureName;
-              var phone = data[i].cars.people.phone;
-              var cars = data[i].cars.plateNumber;
-              var description = data[i].description;
-              var price = data[i].price + "";
-              var date = data[i].date;
-              var row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
-              $("#table").append(row);
+        $.getJSON(domain + '/allworks/' + page + '/' + pageSize, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var name = data[i].cars.people.name + '<br>' + data[i].cars.people.sureName;
+                var phone = data[i].cars.people.phone;
+                var cars = data[i].cars.plateNumber;
+                var description = data[i].description;
+                var price = data[i].price + "";
+                var date = data[i].date;
+                var row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
+                $("#table").append(row);
+            }
+        });
+    }
+
+    function plusPage() {
+        getPageRow = document.getElementById("table").rows.length;
+
+        if (getPageRow > pageSize) {
+            $("#table #tr").remove();
+            page = page + 1;
+            loadWork();
         }
-    });
-}
-
-function plusPage() {
-    getPageRow = document.getElementById("table").rows.length;
-
-    if (getPageRow > pageSize) {
-        $("#table #tr").remove();
-        page = page+1;
-        loadWork();
     }
-}
 
-function minusPage() {
-    if (page != 0) {
-        $("#table #tr").remove();
-        page = page-1;
-        loadWork();
+    function minusPage() {
+        if (page != 0) {
+            $("#table #tr").remove();
+            page = page - 1;
+            loadWork();
+        }
     }
-}
 
 </script>
 </body>
