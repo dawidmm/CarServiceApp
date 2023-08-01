@@ -15,28 +15,31 @@
 <body>
 
 <div class="navbar-dewis d-flex justify-content-center">
-    <a href="" th:href="@{/}">Strona główna</a>
-    <div class="dropdown-dewis">
-        <button class="dropbtn-dewis">Szukaj
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content-dewis">
-            <a href="" th:href="@{/find}">Zlecenia</a>
-            <a href="" th:href="@{/finduser}">Klienci</a>
-            <a href="" th:href="@{/findcar}">Samochody</a>
+    <div class="m-auto">
+        <a href="" th:href="@{/}">Strona główna</a>
+        <div class="dropdown-dewis">
+            <button class="dropbtn-dewis">Szukaj
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content-dewis">
+                <a href="" th:href="@{/find}">Zlecenia</a>
+                <a href="" th:href="@{/finduser}">Klienci</a>
+                <a href="" th:href="@{/findcar}">Samochody</a>
+            </div>
+        </div>
+        <div class="dropdown-dewis">
+            <button class="dropbtn-dewis">Dodaj
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content-dewis">
+                <a href="" th:href="@{/add}">Dodaj klienta</a>
+                <a href="" th:href="@{/add_car}">Dodaj samochód</a>
+                <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+                <a href="" th:href="@{/add_calendar}">Dodaj zlecenie do kalendarza</a>
+            </div>
         </div>
     </div>
-    <div class="dropdown-dewis">
-        <button class="dropbtn-dewis">Dodaj
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content-dewis">
-            <a href="" th:href="@{/add}">Dodaj klienta</a>
-            <a href="" th:href="@{/add_car}">Dodaj samochód</a>
-            <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
-            <a href="" th:href="@{/add_calendar}">Dodaj zlecenie do kalendarza</a>
-        </div>
-    </div>
+    <a class="m-0" href="" th:href="@{/logout}">Wyloguj</a>
 </div>
 
 <br>
@@ -105,6 +108,7 @@
             loadWork();
         }
     }
+
 
 </script>
 </body>
