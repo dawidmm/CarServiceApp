@@ -45,20 +45,32 @@ function postWork() {
     var ownerSt;
     var descSt = document.getElementById('desc').value;
     var priceSt = document.getElementById('price').value;
+    var formData = new FormData();
+    var filesSt = $("#files")[0].files;
 
     if (!(document.getElementById('car2').value == ""))
         ownerSt = getDataListSelectedOption('car2', 'car');
 
-    $.post(domain + "/add_work", {
-        car: ownerSt,
-        desc: descSt,
-        price: priceSt
-    }, function (data) {
-        if (data === 200) {
+    for (let i = 0; i < filesSt.length; i++) {
+        formData.append("files", filesSt[i]);
+    }
+
+    formData.append("car", ownerSt);
+    formData.append("desc", descSt);
+    formData.append("price", priceSt);
+
+    $.ajax({
+        url: domain + "/add_work",
+        type: 'POST',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
             window.location.replace(domain + "/add_work?add");
-        } else {
+        },
+        error: function (error) {
             window.location.replace(domain + "/add_work?error");
         }
     });
-
 }

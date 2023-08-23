@@ -82,6 +82,11 @@ public class Route {
         return "add_calendar";
     }
 
+    @GetMapping("/files")
+    public String files() {
+        return "files";
+    }
+
     // *POST MAPPING*
 
     @PostMapping("/add")

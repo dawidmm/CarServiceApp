@@ -308,7 +308,11 @@ function rowBuilder(id) {
         cars + "</td><td id='fourColumn' class='td-breaker'>" +
         description + "</td><td id='fiveColumn'>" +
         price + "</td><td id='sixColumn'>" +
-        date + "</td></tr>";
+        date + "</td><td><img src='img/file.svg' class='rounded p-2' onClick='goToFilePage(" + id + ")'></td></tr>";
+}
+
+function goToFilePage(id) {
+    window.location.href = "/files?" + id;
 }
 
 function oneTh() {

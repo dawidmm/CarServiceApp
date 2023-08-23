@@ -188,3 +188,7 @@ select, input {
 .circled {
     border-radius: 0.25rem;
 }
+
+#forFiles {
+    text-align: center;
+}

@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +20,7 @@ import java.io.Serializable;
 @Table(name = "work")
 public class Work implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -36,4 +38,7 @@ public class Work implements Serializable {
     @ManyToOne
     @NotNull
     private Cars cars;
+
+    @ElementCollection
+    private List<String> files = new ArrayList<>();
 }

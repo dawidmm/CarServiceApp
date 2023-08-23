@@ -46,7 +46,7 @@
 <br>
 
 <div class="container col-md-4 rounded p-3 bg-dewis">
-    <form th:action="@{/add_work}" method="post" id="form" name="form">
+    <form th:action="@{/add_work}" method="post" id="form" name="form" enctype="multipart/form-data">
 
         <div class="form-group d-flex justify-content-center p-2">
             <!--            <select name="car" id="car" class="rounded">-->
@@ -71,6 +71,11 @@
                       autofocus="autofocus" rows="4" required></textarea>
         </div>
 
+        <div class="form-group p-2">
+            <label for="files">Pliki: </label>
+            <input type="file" class="form-control" id="files" name="files" placeholder="Wybierz pliki ..."
+                   autofocus="autofocus" multiple>
+        </div>
 
         <!-- button -->
 
@@ -79,8 +84,6 @@
         <div class="form-group">
             <div class="row">
                 <div class="container">
-                    <!--                    <input type="submit" name="submit" id="submit"-->
-                    <!--                           class="form-control btn btn-success" value="Dodaj samochód">-->
                     <button type="button" th:onclick="postWork()" name="submit" id="submit"
                             class="form-control btn btn-success bg-success btn-color-dewis">
                         Dodaj zlecenie

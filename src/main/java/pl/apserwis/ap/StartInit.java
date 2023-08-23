@@ -25,13 +25,13 @@ public class StartInit {
 
     @Bean
     public void onStartInit() {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 10; i++) {
             People people = new People();
             people.setName("Dawid" + i);
             people.setSureName("Marcinek" + i);
             people.setPhone("11111111" + i);
 
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 10; j++)
                 p.save(people);
 
             Cars car = new Cars();
@@ -39,7 +39,7 @@ public class StartInit {
             car.setVin("TESTTESTTESTTESTTEST" + i);
             car.setPeople(people);
 
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 10; j++)
                 c.save(car);
 
             Work work = new Work();
@@ -48,7 +48,7 @@ public class StartInit {
             work.setDate("2022-06-08<br>18:29");
             work.setCars(car);
 
-            for (int j = 0; j < 20; j++)
+            for (int j = 0; j < 10; j++)
                 w.save(new WorkDto(work).getWork());
 
             Calendar calendar = new Calendar();
