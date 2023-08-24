@@ -190,5 +190,20 @@ select, input {
 }
 
 #forFiles {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     text-align: center;
+    width: 80%;
+    margin: auto;
+    background: #333;
+    padding: 5px;
+}
+
+#singleFiles {
+    background: #4a4a4a;
+    margin: 5px;
+}
+
+#img-files:hover {
+    background-color: #4a4a4a;
 }

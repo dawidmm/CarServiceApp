@@ -1,4 +1,10 @@
-window.onload = reworkTable;
+window.onload = start;
+
+function start() {
+    reworkTable();
+    findUser();
+}
+
 var row;
 
 var page = 0;

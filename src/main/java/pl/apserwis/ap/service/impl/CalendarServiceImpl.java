@@ -1,6 +1,8 @@
 package pl.apserwis.ap.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import pl.apserwis.ap.comp.DateComp;
 import pl.apserwis.ap.entity.Calendar;
@@ -27,16 +29,20 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public List<Calendar> get(int pageSize, int page) {
+    public Page<Calendar> get(int pageSize, int page) {
         List<Calendar> calendarList = getAll().stream().sorted(new DateComp()).collect(Collectors.toList());
 
         if (calendarList.size() < pageSize)
-            return calendarList;
+            return new PageImpl<>(calendarList);
 
-        if (page <= 0)
-            return calendarList.subList(0, pageSize);
-        else
-            return calendarList.subList(page * pageSize, page * pageSize + pageSize);
+        int listSize = calendarList.size();
+        int startIndex = pageSize * page;
+        int endIndex = startIndex + pageSize;
+
+        if (endIndex > listSize)
+            endIndex = listSize;
+
+        return new PageImpl<>(calendarList.subList(startIndex, endIndex));
     }
 
     public void deleteById(Long id) {

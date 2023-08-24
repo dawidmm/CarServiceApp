@@ -8,16 +8,16 @@ function start() {
 
 function find() {
     $.getJSON(domain + '/calendar/' + 10 + '/' + page, function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var desc = data[i].description;
-            var plate = data[i].plateNumber;
-            var date = data[i].date;
-            var id = data[i].id;
-            var row = "<tr id='tr' class='tr' onClick=''>" +
-                "<td id='oneColumn'>" + plate + "</td>" +
+        for (var i = 0; i < data.content.length; i++) {
+            var desc = data.content[i].description;
+            var plate = data.content[i].plateNumber;
+            var date = data.content[i].date;
+            var id = data.content[i].id;
+            var row = "<tr id='tr' class='tr'>" +
+                "<td id='oneColumn' style='width: 15%;'>" + plate + "</td>" +
                 "<td id='twoColumn'>" + desc + "</td>" +
-                "<td id='threeColumn'>" + date + "</td>" +
-                "<td id='fourColumn' onclick=deleteById(" + id + ")>" + 'Usuń' + "</td>" +
+                "<td id='threeColumn' style='width: 10%;'>" + date + "</td>" +
+                "<td id='fourColumn' onclick=deleteById(" + id + ") style='width: 32px;'><img src='img/trash.png' style='width: 32px; height: 32px;' /></td>" +
                 "</tr>";
             $("#table").append(row);
         }
@@ -48,8 +48,12 @@ function minusPage() {
 }
 
 function plusPage() {
-    $("#table #tr").remove()
-    page = page + 1;
-    document.getElementById('pageCounter').innerHTML = page;
-    find();
+    getPageRow = document.getElementById("table").rows.length;
+
+    if (getPageRow > pageSize) {
+        $("#table #tr").remove()
+        page = page + 1;
+        document.getElementById('pageCounter').innerHTML = page;
+        find();
+    }
 }

@@ -54,7 +54,7 @@ public class StartInit {
             Calendar calendar = new Calendar();
             calendar.setDescription("test" + i);
             calendar.setDate(i + "-11-2021");
-            calendar.setPlateNumber("" + i + i + i);
+            calendar.setPlateNumber("SRC RY02");
 
             cal.save(calendar);
         }

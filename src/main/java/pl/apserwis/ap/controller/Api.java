@@ -227,7 +227,7 @@ public class Api {
     }
 
     @GetMapping("/calendar/{pageSize}/{page}")
-    public List<Calendar> getAllCalendarWithPaging(@PathVariable("pageSize") int pageSize, @PathVariable("page") int page) {
+    public Page<Calendar> getAllCalendarWithPaging(@PathVariable("pageSize") int pageSize, @PathVariable("page") int page) {
         return calendarService.get(pageSize, page);
     }
 

@@ -72,6 +72,7 @@ function start() {
         }
     });
     start2();
+    findAllWorks();
 }
 
 function start2() {
@@ -80,10 +81,8 @@ function start2() {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('name');
             var opt = document.createElement('option');
-//            opt.data = data[i].id;
             $(opt).attr('data-id', data[i].id);
             var name = data[i].name + " " + data[i].sureName;
-//            opt.innerHTML = name;
             opt.value = name;
             select.appendChild(opt);
         }
@@ -169,7 +168,6 @@ function findAllWorks(sqlFlag) {
             price = data.content[i].price + "";
             date = data.content[i].date;
             rowBuilder(data.content[i].id);
-//              row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
             $("#table").append(row);
             reworkTable();
         }
