@@ -41,4 +41,7 @@ public class Work implements Serializable {
 
     @ElementCollection
     private List<String> files = new ArrayList<>();
+
+    @Column(name = "accepted", columnDefinition = "boolean default false", nullable = false)
+    private Boolean accepted = false;
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ap-Serwis</title>
+    <link href="css/dark-theme2.css" rel="stylesheet">
+    <link href="css/bt/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <script src="js/signature.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/bt/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="navbar-dewis d-flex justify-content-center">
+    <div class="m-auto">
+        <a href="" th:href="@{/}">Strona główna</a>
+        <div class="dropdown-dewis">
+            <button class="dropbtn-dewis">Szukaj
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content-dewis">
+                <a href="" th:href="@{/find}">Zlecenia</a>
+                <a href="" th:href="@{/finduser}">Klienci</a>
+                <a href="" th:href="@{/findcar}">Samochody</a>
+            </div>
+        </div>
+        <div class="dropdown-dewis">
+            <button class="dropbtn-dewis">Dodaj
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content-dewis">
+                <a href="" th:href="@{/add}">Dodaj klienta</a>
+                <a href="" th:href="@{/add_car}">Dodaj samochód</a>
+                <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
+                <a href="" th:href="@{/add_calendar}">Dodaj zlecenie do kalendarza</a>
+            </div>
+        </div>
+    </div>
+    <a class="m-0" href="" th:href="@{/logout}">Wyloguj</a>
+</div>
+
+<br>
+
+<img id="img-sign" style="width: auto; height: auto; background: white; transform: scale(0.5);">
+
+
+</body>
+</html>

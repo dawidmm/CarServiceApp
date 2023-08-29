@@ -275,4 +275,17 @@ public class Api {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(r);
     }
+
+    @PostMapping("/work/accept/{workId}")
+    public ResponseEntity<Boolean> acceptWork(@PathVariable("workId") String workId,
+                                              @RequestParam("signature") String signature) throws IOException, URISyntaxException {
+        workService.acceptWork(Long.parseLong(workId), signature);
+
+        return new ResponseEntity<>(true, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/work/{workId}/signature")
+    public ResponseEntity<String> getSignature(@PathVariable("workId") String workId) throws IOException {
+        return new ResponseEntity<>(workService.getBase64Signature(Long.parseLong(workId)), HttpStatus.OK);
+    }
 }

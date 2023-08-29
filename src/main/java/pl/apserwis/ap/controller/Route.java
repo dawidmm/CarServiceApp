@@ -87,6 +87,16 @@ public class Route {
         return "files";
     }
 
+    @GetMapping("/canvas")
+    public String canvas() {
+        return "canvas";
+    }
+
+    @GetMapping("/signature")
+    public String signature() {
+        return "signature";
+    }
+
     // *POST MAPPING*
 
     @PostMapping("/add")

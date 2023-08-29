@@ -1,11 +1,13 @@
 package pl.apserwis.ap.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 import pl.apserwis.ap.comp.SortComp;
@@ -14,13 +16,17 @@ import pl.apserwis.ap.service.WorkService;
 import pl.apserwis.ap.service.repository.WorkRepository;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 
 @AllArgsConstructor
 @Service
@@ -166,5 +172,52 @@ public class WorkServiceImpl implements WorkService {
     public File getFile(long workId, String fileName) throws IOException {
         return ResourceUtils.getFile(
                 ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId + "/" + fileName);
+    }
+
+    @Override
+    @Transactional
+    public void acceptWork(long workId, String signature) throws IOException, URISyntaxException {
+        String base64Image = signature.split(",")[1];
+        byte[] imageBytes = parseBase64Binary(base64Image);
+
+        String workPath = ResourceUtils.getURL("").getFile() + FILES_PATH + "/" + workId + "/sign";
+
+        new File(workPath).mkdirs();
+        workPath += "/signature.png";
+        new File(workPath).createNewFile();
+
+        try (FileOutputStream fos = new FileOutputStream(workPath)) {
+            fos.write(imageBytes);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't save file");
+        }
+
+        Optional<Work> work = workRepository.findById(workId);
+
+        if (work.isPresent()) {
+            work.get().setAccepted(true);
+            workRepository.save(work.get());
+        } else {
+            throw new RuntimeException("Work with id not found: " + workId);
+        }
+    }
+
+    @Override
+    public String getBase64Signature(long workId) throws IOException {
+        Optional<Work> work = workRepository.findById(workId);
+
+        if (work.isPresent()) {
+            if (work.get().getAccepted()) {
+                File f = ResourceUtils.getFile(
+                        ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId + "/sign/signature.png");
+                byte[] encoded = Base64.encodeBase64(Files.readAllBytes(f.toPath()));
+
+                return new String(encoded, StandardCharsets.US_ASCII);
+            } else {
+                throw new RuntimeException("Work is'n accepted! id: " + workId);
+            }
+        } else {
+            throw new RuntimeException("Work with id not found: " + workId);
+        }
     }
 }

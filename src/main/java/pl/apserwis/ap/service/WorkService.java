@@ -26,4 +26,8 @@ public interface WorkService {
     List<String> getFileNames(long workId);
 
     void deleteFiles(long workId) throws URISyntaxException, IOException;
+
+    void acceptWork(long workId, String signature) throws IOException, URISyntaxException;
+
+    String getBase64Signature(long workId) throws IOException;
 }

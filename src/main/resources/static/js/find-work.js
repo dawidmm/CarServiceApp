@@ -24,6 +24,7 @@ var cars;
 var description;
 var price;
 var date;
+var accepted;
 
 var oneThCol = false;
 var twoThCol = false;
@@ -108,6 +109,7 @@ function findWithPlate(sqlFlag) {
             description = data.content[i].description;
             price = data.content[i].price + "";
             date = data.content[i].date;
+            accepted = data.content[i].accepted;
             rowBuilder(data.content[i].id);
 //          row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
             $("#table").append(row);
@@ -138,6 +140,7 @@ function findWithName(sqlFlag) {
             description = data.content[i].description;
             price = data.content[i].price + "";
             date = data.content[i].date;
+            accepted = data.content[i].accepted;
             rowBuilder(data.content[i].id);
 //          row = "<tr id='tr' class='tr'><td>" + name + "</td><td>" + phone + "</td><td>" + cars + "</td><td class='td-breaker'>" + description + "</td><td>" + price + "</td><td>" + date + "</td></tr>";
             $("#table").append(row);
@@ -167,6 +170,7 @@ function findAllWorks(sqlFlag) {
             description = data.content[i].description;
             price = data.content[i].price + "";
             date = data.content[i].date;
+            accepted = data.content[i].accepted;
             rowBuilder(data.content[i].id);
             $("#table").append(row);
             reworkTable();
@@ -306,11 +310,26 @@ function rowBuilder(id) {
         cars + "</td><td id='fourColumn' class='td-breaker'>" +
         description + "</td><td id='fiveColumn'>" +
         price + "</td><td id='sixColumn'>" +
-        date + "</td><td><img src='img/file.svg' class='rounded p-2' onClick='goToFilePage(" + id + ")'></td></tr>";
+        date + "</td>" +
+        "<td><img src='img/file.svg' class='rounded p-2' onClick='goToFilePage(" + id + ")'></td>";
+
+        if (accepted) {
+            row += "<td><img src='img/contract.png' class='rounded p-2' onClick='showSignature(" + id + ")'></td></tr>";
+        } else {
+            row += "<td><img src='img/accepted.png' class='rounded p-2' onClick='goToAcceptPage(" + id + ")'></td></tr>";
+        }
 }
 
 function goToFilePage(id) {
     window.location.href = "/files?" + id;
+}
+
+function goToAcceptPage(id) {
+    window.location.href = "/canvas?" + id;
+}
+
+function showSignature(id) {
+    window.location.href = "/signature?" + id;
 }
 
 function oneTh() {
