@@ -134,12 +134,16 @@ select, input {
 
 .navbar-dewis a {
     float: left;
-    font-size: 16px;
+    font-size: 20px;
     color: #cbcbcb;
     text-align: center;
-    padding: 14px 16px;
+    padding: 16px 16px;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
+}
+
+.dewis-a {
+    font-size: 16px !important;
 }
 
 .dropdown-dewis {
@@ -148,11 +152,11 @@ select, input {
 }
 
 .dropdown-dewis .dropbtn-dewis {
-    font-size: 16px;
+    font-size: 20px;
     border: none;
     outline: none;
     color: #cbcbcb;
-    padding: 14px 16px;
+    padding: 16px 16px;
     background-color: inherit;
     font-family: 'Roboto', sans-serif;
     margin: 0;

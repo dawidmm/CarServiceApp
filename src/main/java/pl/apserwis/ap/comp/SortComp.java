@@ -23,8 +23,8 @@ public class SortComp implements Comparator<Work> {
         switch (column) {
             case 1:
                 if (sortChar.equals("+"))
-                    return (int)(o1.getId() - o2.getId());
-                return (int)(o2.getId() - o1.getId());
+                    return (int) (o1.getId() - o2.getId());
+                return (int) (o2.getId() - o1.getId());
             case 2:
                 if (sortChar.equals("+"))
                     return compareString(o1.getCars().getPeople().getPhone(), o2.getCars().getPeople().getPhone());
@@ -37,10 +37,10 @@ public class SortComp implements Comparator<Work> {
                 if (sortChar.equals("+"))
                     return compareString(o1.getDescription(), o2.getDescription());
                 return compareString(o2.getDescription(), o1.getDescription());
-            case 5:
-                if (sortChar.equals("+"))
-                    return Integer.parseInt(o1.getPrice()) - Integer.parseInt(o2.getPrice());
-                return Integer.parseInt(o2.getPrice()) - Integer.parseInt(o1.getPrice());
+//            case 5:
+//                if (sortChar.equals("+"))
+//                    return Integer.parseInt(o1.getPrice()) - Integer.parseInt(o2.getPrice());
+//                return Integer.parseInt(o2.getPrice()) - Integer.parseInt(o1.getPrice());
             case 6:
                 if (sortChar.equals("+"))
                     return compareString(o1.getDate(), o2.getDate());

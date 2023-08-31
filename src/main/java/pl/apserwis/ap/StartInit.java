@@ -44,7 +44,7 @@ public class StartInit {
 
             Work work = new Work();
             work.setDescription("Testowy opis zmiany wprowadzonych w samochodzie klienta, wraz z kompleksową obsługą bla bla bla: " + i);
-            work.setPrice(i + "");
+//            work.setPrice(i + "");
             work.setDate("2022-06-08<br>18:29");
             work.setCars(car);
 

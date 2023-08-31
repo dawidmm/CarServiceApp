@@ -196,7 +196,7 @@ public class Api {
     @Transactional
     @PostMapping(value = "/add_work")
     public ResponseEntity<Work> addWork(String car,
-                                        String price,
+//                                        String price,
                                         String desc,
                                         @RequestPart(value = "files", required = false) List<MultipartFile> files) {
         Work work;
@@ -210,7 +210,9 @@ public class Api {
         timestamp = new Timestamp(System.currentTimeMillis());
         String[] date = sdf.format(timestamp).split(" ");
         try {
-            work = workRepository.save(new WorkDto(Long.parseLong(car), price, desc, date[0] + "<br>" + date[1]).getWork());
+            work = workRepository.save(new WorkDto(Long.parseLong(car)
+//                    ,price
+                    , desc, date[0] + "<br>" + date[1]).getWork());
 
             if (files != null) {
                 workService.saveFiles(work, files);

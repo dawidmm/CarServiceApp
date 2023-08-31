@@ -22,7 +22,7 @@ var name;
 var phone;
 var cars;
 var description;
-var price;
+//var price;
 var date;
 var accepted;
 
@@ -30,7 +30,7 @@ var oneThCol = false;
 var twoThCol = false;
 var threeThCol = false;
 var fourThCol = false;
-var fiveThCol = false;
+//var fiveThCol = false;
 var sixThCol = false;
 
 var plateFlag = false;
@@ -50,6 +50,7 @@ var deleteBool = false;
 function clearFindFlag() {
     plateFlag = false;
     nameFlag = false;
+    allFlag = false;
     allFlag = false;
 }
 
@@ -107,7 +108,7 @@ function findWithPlate(sqlFlag) {
             phone = data.content[i].cars.people.phone;
             cars = data.content[i].cars.plateNumber;
             description = data.content[i].description;
-            price = data.content[i].price + "";
+//            price = data.content[i].price + "";
             date = data.content[i].date;
             accepted = data.content[i].accepted;
             rowBuilder(data.content[i].id);
@@ -138,7 +139,7 @@ function findWithName(sqlFlag) {
             phone = data.content[i].cars.people.phone;
             cars = data.content[i].cars.plateNumber;
             description = data.content[i].description;
-            price = data.content[i].price + "";
+//            price = data.content[i].price + "";
             date = data.content[i].date;
             accepted = data.content[i].accepted;
             rowBuilder(data.content[i].id);
@@ -168,7 +169,7 @@ function findAllWorks(sqlFlag) {
             phone = data.content[i].cars.people.phone;
             cars = data.content[i].cars.plateNumber;
             description = data.content[i].description;
-            price = data.content[i].price + "";
+//            price = data.content[i].price + "";
             date = data.content[i].date;
             accepted = data.content[i].accepted;
             rowBuilder(data.content[i].id);
@@ -256,7 +257,7 @@ function reworkTable() {
     two = document.getElementById('kontakt').checked;
     three = document.getElementById('rejestracja').checked;
     four = document.getElementById('opis').checked;
-    five = document.getElementById('cena').checked;
+//    five = document.getElementById('cena').checked;
     six = document.getElementById('data').checked;
 
     if (!one) {
@@ -287,13 +288,13 @@ function reworkTable() {
         $("#table #thOpis").show();
         $("#table #fourColumn").show();
     }
-    if (!five) {
-        $("#table #thCena").hide();
-        $("#table #fiveColumn").hide();
-    } else {
-        $("#table #thCena").show();
-        $("#table #fiveColumn").show();
-    }
+//    if (!five) {
+//        $("#table #thCena").hide();
+//        $("#table #fiveColumn").hide();
+//    } else {
+//        $("#table #thCena").show();
+//        $("#table #fiveColumn").show();
+//    }
     if (!six) {
         $("#table #thData").hide();
         $("#table #sixColumn").hide();
@@ -308,8 +309,9 @@ function rowBuilder(id) {
         name + "</td><td id='twoColumn'>" +
         phone + "</td><td id='threeColumn'>" +
         cars + "</td><td id='fourColumn' class='td-breaker'>" +
-        description + "</td><td id='fiveColumn'>" +
-        price + "</td><td id='sixColumn'>" +
+        description + "</td>" +
+        //<td id='fiveColumn'>" + price + "</td>
+        "<td id='sixColumn'>" +
         date + "</td>" +
         "<td><img src='img/file.svg' class='rounded p-2' onClick='goToFilePage(" + id + ")'></td>";
 
@@ -380,17 +382,17 @@ function fourTh() {
     }
 }
 
-function fiveTh() {
-    if (fiveThCol) {
-        //jezeli juz jest znaznaczone
-        clearTh();
-        useGoodSearch(sqlFlag = '5+');
-    } else {
-        fiveThCol = true;
-        useGoodSearch(sqlFlag = '5-');
-        //jezeli nie byl zaznaczony
-    }
-}
+//function fiveTh() {
+//    if (fiveThCol) {
+//        //jezeli juz jest znaznaczone
+//        clearTh();
+//        useGoodSearch(sqlFlag = '5+');
+//    } else {
+//        fiveThCol = true;
+//        useGoodSearch(sqlFlag = '5-');
+//        //jezeli nie byl zaznaczony
+//    }
+//}
 
 function sixTh() {
     if (sixThCol) {
@@ -409,7 +411,7 @@ function clearTh() {
     twoThCol = false;
     threeThCol = false;
     fourThCol = false;
-    fiveThCol = false;
+//    fiveThCol = false;
     sixThCol = false;
 }
 

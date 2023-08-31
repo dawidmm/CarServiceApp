@@ -15,6 +15,8 @@
 <body>
 
 <div class="navbar-dewis d-flex justify-content-center">
+    <img src="img/wrench.png"
+         style="width: 40px; height: 40px; margin: auto; margin-left: 12px; margin-right: 12px; pointer-events: none;">
     <div class="m-auto">
         <a href="" th:href="@{/}">Strona główna</a>
         <div class="dropdown-dewis">
@@ -22,9 +24,9 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content-dewis">
-                <a href="" th:href="@{/find}">Zlecenia</a>
-                <a href="" th:href="@{/finduser}">Klienci</a>
-                <a href="" th:href="@{/findcar}">Samochody</a>
+                <a href="" th:href="@{/find}" class="dewis-a">Zlecenia</a>
+                <a href="" th:href="@{/finduser}" class="dewis-a">Klienci</a>
+                <a href="" th:href="@{/findcar}" class="dewis-a">Samochody</a>
             </div>
         </div>
         <div class="dropdown-dewis">
@@ -32,14 +34,15 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content-dewis">
-                <a href="" th:href="@{/add}">Dodaj klienta</a>
-                <a href="" th:href="@{/add_car}">Dodaj samochód</a>
-                <a href="" th:href="@{/add_work}">Dodaj zlecenie</a>
-                <a href="" th:href="@{/add_calendar}">Dodaj zlecenie do kalendarza</a>
+                <a href="" th:href="@{/add}" class="dewis-a">Dodaj klienta</a>
+                <a href="" th:href="@{/add_car}" class="dewis-a">Dodaj samochód</a>
+                <a href="" th:href="@{/add_work}" class="dewis-a">Dodaj zlecenie</a>
+                <a href="" th:href="@{/add_calendar}" class="dewis-a">Dodaj zlecenie do kalendarza</a>
             </div>
         </div>
     </div>
-    <a class="m-0" href="" th:href="@{/logout}">Wyloguj</a>
+    <a class="m-0" href="" th:href="@{/logout}" style="padding: 15px;"><img src="img/logout.png"
+                                                                            style="margin: 0px; width: 32px; height: 31px;"></a>
 </div>
 
 <br>
@@ -108,6 +111,7 @@
             loadWork();
         }
     }
+
 
 
 </script>

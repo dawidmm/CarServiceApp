@@ -1,12 +1,12 @@
 window.onload = start2;
 
-function disableBtn() {
-    var valuePrice = document.getElementById('price').value;
-    if (!isNaN(valuePrice))
-        document.querySelector('#submit').disabled = false;
-    else
-        document.querySelector('#submit').disabled = true;
-}
+//function disableBtn() {
+//    var valuePrice = document.getElementById('price').value;
+//    if (!isNaN(valuePrice))
+//        document.querySelector('#submit').disabled = false;
+//    else
+//        document.querySelector('#submit').disabled = true;
+//}
 
 function start2() {
     $.getJSON(domain + '/allcars', function (data) {
@@ -30,7 +30,7 @@ function getDataListSelectedOption(txt_input, data_list_options) {
 function postWork() {
     var ownerSt;
     var descSt = document.getElementById('desc').value;
-    var priceSt = document.getElementById('price').value;
+//    var priceSt = document.getElementById('price').value;
     var formData = new FormData();
     var filesSt = $("#files")[0].files;
 
@@ -43,7 +43,7 @@ function postWork() {
 
     formData.append("car", ownerSt);
     formData.append("desc", descSt);
-    formData.append("price", priceSt);
+//    formData.append("price", priceSt);
 
     $.ajax({
         url: domain + "/add_work",

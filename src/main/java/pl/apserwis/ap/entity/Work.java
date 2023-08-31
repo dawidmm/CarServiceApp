@@ -28,9 +28,9 @@ public class Work implements Serializable {
     @Size(min = 1)
     private String description;
 
-    @NotNull
-    @Size(min = 1)
-    private String price;
+//    @NotNull
+//    @Size(min = 1)
+//    private String price;
 
     @NotNull
     private String date;
