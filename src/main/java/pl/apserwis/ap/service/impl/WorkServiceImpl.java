@@ -3,7 +3,6 @@ package pl.apserwis.ap.service.impl;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,6 @@ import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 public class WorkServiceImpl implements WorkService {
 
     private WorkRepository workRepository;
-    private ResourceLoader rs;
 
     public static String FILES_PATH = "files";
 
@@ -159,13 +157,15 @@ public class WorkServiceImpl implements WorkService {
     public void deleteFiles(long workId) throws URISyntaxException, IOException {
         Path dir = Paths.get(ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId);
 
-        Files.walk(dir).sorted(Comparator.reverseOrder()).forEach(p -> {
-            try {
-                Files.delete(p);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if (Files.exists(dir)) {
+            Files.walk(dir).sorted(Comparator.reverseOrder()).forEach(p -> {
+                try {
+                    Files.delete(p);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
     }
 
     @Override

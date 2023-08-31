@@ -1,24 +1,17 @@
 package pl.apserwis.ap.controller;
 
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.apserwis.ap.entity.dto.PeopleDto;
-import pl.apserwis.ap.service.repository.CarsRepository;
 import pl.apserwis.ap.service.repository.PeopleRepository;
-import pl.apserwis.ap.service.repository.WorkRepository;
 
-@org.springframework.stereotype.Controller
+@Controller
+@AllArgsConstructor
 public class Route {
 
     private PeopleRepository peopleRepository;
-    private CarsRepository carsRepository;
-    private WorkRepository workRepository;
-
-    public Route(PeopleRepository peopleRepository, CarsRepository carsRepository, WorkRepository workRepository) {
-        this.peopleRepository = peopleRepository;
-        this.carsRepository = carsRepository;
-        this.workRepository = workRepository;
-    }
 
     // *HTML TEMPLATE*
 
