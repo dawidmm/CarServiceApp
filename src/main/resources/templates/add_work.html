@@ -55,7 +55,7 @@
             <!--            <select name="car" id="car" class="rounded">-->
             <!--                <option value="">Wybierz samochód</option>-->
             <!--            </select>-->
-            <input list="car" placeholder="Wybierz samochód" id="car2"/>
+            <input list="car" placeholder="Wybierz samochód" id="car2" autocomplete="off"/>
             <datalist id="car" class="rounded">
                 <option data-id="0"></option>
             </datalist>
@@ -99,6 +99,11 @@
 
     <br>
 
+    <div>
+        <div class="alert alert-warning" role="alert" id="warning" style="display: none">Maksymalny rozmiar 1 pliku to
+            10MB, a wszystkie pliki nie mogą przekraczać 50MB!
+        </div>
+    </div>
     <div th:if="${param.add}">
         <div class="alert alert-success" role="alert">Dodano prawidłowo!</div>
     </div>
@@ -107,5 +112,6 @@
     </div>
 </div>
 
+<script src="js/files-calc-size.js"></script>
 </body>
 </html>
