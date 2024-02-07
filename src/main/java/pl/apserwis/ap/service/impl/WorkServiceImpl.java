@@ -127,12 +127,13 @@ public class WorkServiceImpl implements WorkService {
 
         for (MultipartFile f : files) {
             String workPath = ResourceUtils.getURL("").getFile() + FILES_PATH + "/" + work.getId();
+            workPath = workPath.substring(1).replaceAll("%20", " ");
             file = new File(workPath + "/" + f.getOriginalFilename());
 
             File workDirectory = new File(workPath);
 
             if (!workDirectory.exists())
-                workDirectory.mkdir();
+                workDirectory.mkdirs();
 
             file.createNewFile();
             f.transferTo(file);
@@ -155,8 +156,9 @@ public class WorkServiceImpl implements WorkService {
 
     @Override
     public void deleteFiles(long workId) throws URISyntaxException, IOException {
-        Path dir = Paths.get(ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId);
-
+        String fileName = ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId;
+        fileName = fileName.replaceAll("%20", " ");
+        Path dir = Paths.get(fileName);
         if (Files.exists(dir)) {
             Files.walk(dir).sorted(Comparator.reverseOrder()).forEach(p -> {
                 try {
@@ -170,8 +172,10 @@ public class WorkServiceImpl implements WorkService {
 
     @Override
     public File getFile(long workId, String fileName) throws IOException {
-        return ResourceUtils.getFile(
-                ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId + "/" + fileName);
+        String fileNameToGet = ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId + "/" + fileName;
+        fileNameToGet = fileNameToGet.replaceAll("%20", " ");
+
+        return ResourceUtils.getFile(fileNameToGet);
     }
 
     @Override
@@ -181,6 +185,7 @@ public class WorkServiceImpl implements WorkService {
         byte[] imageBytes = parseBase64Binary(base64Image);
 
         String workPath = ResourceUtils.getURL("").getFile() + FILES_PATH + "/" + workId + "/sign";
+        workPath = workPath.replaceAll("%20", " ");
 
         new File(workPath).mkdirs();
         workPath += "/signature.png";
@@ -208,8 +213,10 @@ public class WorkServiceImpl implements WorkService {
 
         if (work.isPresent()) {
             if (work.get().getAccepted()) {
-                File f = ResourceUtils.getFile(
-                        ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId + "/sign/signature.png");
+                String fileName = ResourceUtils.getURL("").getFile().substring(1) + FILES_PATH + "/" + workId + "/sign/signature.png";
+                fileName = fileName.replaceAll("%20", " ");
+
+                File f = ResourceUtils.getFile(fileName);
                 byte[] encoded = Base64.encodeBase64(Files.readAllBytes(f.toPath()));
 
                 return new String(encoded, StandardCharsets.US_ASCII);
