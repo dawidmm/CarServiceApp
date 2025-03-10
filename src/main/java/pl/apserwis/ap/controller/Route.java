@@ -90,6 +90,11 @@ public class Route {
         return "signature";
     }
 
+    @GetMapping("/edit_work")
+    public String editWork() {
+        return "edit_work";
+    }
+
     // *POST MAPPING*
 
     @PostMapping("/add")

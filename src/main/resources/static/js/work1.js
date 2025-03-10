@@ -1,20 +1,13 @@
 window.onload = start2;
 
-//function disableBtn() {
-//    var valuePrice = document.getElementById('price').value;
-//    if (!isNaN(valuePrice))
-//        document.querySelector('#submit').disabled = false;
-//    else
-//        document.querySelector('#submit').disabled = true;
-//}
-
 function start2() {
     $.getJSON(domain + '/allcars', function (data) {
         for (var i = 0; i < data.length; i++) {
             var select = document.getElementById('car');
             var opt = document.createElement('option');
             $(opt).attr('data-id', data[i].id);
-            var name = 'NR REJ: ' + data[i].plateNumber + ' VIN: ' + data[i].vin;
+            console.log(data[i]);
+            var name = 'Nr rejestracyjny: ' + data[i].plateNumber + ', Telefon: ' + data[i].people.phone;
             opt.value = name;
             select.appendChild(opt);
         }
@@ -60,3 +53,4 @@ function postWork() {
         }
     });
 }
+

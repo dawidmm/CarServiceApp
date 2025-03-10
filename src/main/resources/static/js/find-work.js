@@ -316,10 +316,11 @@ function rowBuilder(id) {
         "<td><img src='img/file.svg' class='rounded p-2' onClick='goToFilePage(" + id + ")'></td>";
 
         if (accepted) {
-            row += "<td><img src='img/contract.png' class='rounded p-2' onClick='showSignature(" + id + ")'></td></tr>";
+            row += "<td><img src='img/contract.png' class='rounded p-2' onClick='showSignature(" + id + ")'></td>";
         } else {
-            row += "<td><img src='img/accepted.png' class='rounded p-2' onClick='goToAcceptPage(" + id + ")'></td></tr>";
+            row += "<td><img src='img/accepted.png' class='rounded p-2' onClick='goToAcceptPage(" + id + ")'></td>";
         }
+        row += "<td><img src='img/wrench2.png' class='rounded p-2' onClick='openEdit(" + id + ")'></td></tr>"
 }
 
 function goToFilePage(id) {
@@ -332,6 +333,10 @@ function goToAcceptPage(id) {
 
 function showSignature(id) {
     window.location.href = "/signature?" + id;
+}
+
+function openEdit(id) {
+     window.location.href = "/edit_work?" + id;
 }
 
 function oneTh() {

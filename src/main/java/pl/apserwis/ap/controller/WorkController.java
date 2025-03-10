@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -133,6 +134,18 @@ public class WorkController {
         return new ResponseEntity<>(workService.getBase64Signature(Long.parseLong(workId)), HttpStatus.OK);
     }
 
+    @GetMapping("/work/{workId}")
+    public ResponseEntity<WorkDto> getWorkById(@PathVariable("workId") String workId) {
+        Optional<Work> workOpt = workRepository.findById(Long.parseLong(workId));
+
+        if (workOpt.isPresent()) {
+            WorkDto workDto = new WorkDto(workOpt.get());
+            return new ResponseEntity<>(workDto, HttpStatus.OK);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/allworks/{page}/{pageSize}")
     public Page<Work> getAllWorks(@PathVariable("page") int page,
                                   @PathVariable("pageSize") int pageSize,
@@ -141,5 +154,21 @@ public class WorkController {
                                   @RequestParam("edate") String endDate) {
 
         return workService.findAllWithSort(page, pageSize, sql, startDate, endDate);
+    }
+
+    @Transactional
+    @PostMapping("/edit_work/{id}")
+    public ResponseEntity<String> editWork(@PathVariable("id") int id, @RequestBody String desc) {
+        Optional<Work> workOpt = workRepository.findById(Long.parseLong(String.valueOf(id)));
+        if (workOpt.isPresent()) {
+            Work work = workOpt.get();
+            work.setDescription(desc);
+            workRepository.save(work);
+
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.notFound().build();
+
     }
 }

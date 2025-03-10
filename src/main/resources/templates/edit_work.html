@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ap-Serwis</title>
+  <link href="css/dark-theme2.css" rel="stylesheet">
+  <link href="css/bt/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <script src="js/bt/bootstrap.bundle.min.js"></script>
+  <script src="js/edit_work.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/jquery/jquery.js"></script>
+</head>
+<body>
+
+<div class="navbar-dewis d-flex justify-content-center">
+  <img src="img/wrench.png"
+       style="width: 40px; height: 40px; margin: auto; margin-left: 12px; margin-right: 12px; pointer-events: none;">
+  <div class="m-auto">
+    <a href="" th:href="@{/}">Strona główna</a>
+    <div class="dropdown-dewis">
+      <button class="dropbtn-dewis">Szukaj
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content-dewis">
+        <a href="" th:href="@{/find}" class="dewis-a">Zlecenia</a>
+        <a href="" th:href="@{/finduser}" class="dewis-a">Klienci</a>
+        <a href="" th:href="@{/findcar}" class="dewis-a">Samochody</a>
+      </div>
+    </div>
+    <div class="dropdown-dewis">
+      <button class="dropbtn-dewis">Dodaj
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content-dewis">
+        <a href="" th:href="@{/add}" class="dewis-a">Dodaj klienta</a>
+        <a href="" th:href="@{/add_car}" class="dewis-a">Dodaj samochód</a>
+        <a href="" th:href="@{/add_work}" class="dewis-a">Dodaj zlecenie</a>
+        <a href="" th:href="@{/add_calendar}" class="dewis-a">Dodaj zlecenie do kalendarza</a>
+      </div>
+    </div>
+  </div>
+  <a class="m-0" href="" th:href="@{/logout}" style="padding: 15px;"><img src="img/logout.png"
+                                                                          style="margin: 0px; width: 32px; height: 31px;"></a>
+</div>
+<br/>
+<div class="container col-md-4 rounded bg-dewis p-3">
+<form th:action="@{/add_work}" method="post" id="form" name="form" enctype="multipart/form-data">
+  <div class="form-group p-2">
+    <label for="desc">Opis: </label>
+    <textarea class="form-control" id="desc" name="desc" placeholder="Wpisz opis ..."
+              autofocus="autofocus" rows="4" required></textarea>
+  </div>
+  <!-- button -->
+  <br>
+  <div class="form-group">
+    <div class="row">
+      <div class="container">
+        <button type="button" th:onclick="editPostWork()" name="submit" id="submit"
+                class="form-control btn btn-success bg-success btn-color-dewis">
+          Aktualizuj
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+</body>
+</html>
